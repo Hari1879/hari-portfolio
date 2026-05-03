@@ -26,12 +26,16 @@ const SKILLS = [
 ];
 
 const R = 44; // bubble radius px
+const REPEL_RADIUS = 140;
+const SPEED_CAP    = 5;
 
 export default function SkillOrbit() {
   const containerRef = useRef(null);
   const rafRef       = useRef(null);
   const physRef      = useRef([]);   // mutable physics — no re-renders
   const nodeRefs     = useRef({});   // id → DOM node
+  const mouseRef     = useRef({ x: -9999, y: -9999 });
+  const cursorRef    = useRef(null);
 
   const [active,    setActive]    = useState(null);
   const [collected, setCollected] = useState(new Set());
@@ -71,8 +75,25 @@ export default function SkillOrbit() {
 
     const tick = () => {
       const W = el.clientWidth, H = el.clientHeight;
+      const { x: mx, y: my } = mouseRef.current;
       physRef.current.forEach(b => {
         if (!b.alive) return;
+
+        // Mouse repulsion
+        const dx = b.x - mx, dy = b.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < REPEL_RADIUS && dist > 0) {
+          const force = ((REPEL_RADIUS - dist) / REPEL_RADIUS) * 1.2;
+          b.vx += (dx / dist) * force;
+          b.vy += (dy / dist) * force;
+        }
+
+        // Speed cap + damping
+        const speed = Math.sqrt(b.vx * b.vx + b.vy * b.vy);
+        if (speed > SPEED_CAP) { b.vx = (b.vx / speed) * SPEED_CAP; b.vy = (b.vy / speed) * SPEED_CAP; }
+        b.vx *= 0.985;
+        b.vy *= 0.985;
+
         b.x += b.vx;
         b.y += b.vy;
         if (b.x < R)     { b.x = R;     b.vx =  Math.abs(b.vx); }
@@ -127,11 +148,33 @@ export default function SkillOrbit() {
     });
   };
 
+  const handleMouseMove = (e) => {
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    mouseRef.current = { x, y };
+    if (cursorRef.current) {
+      cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
+      cursorRef.current.style.opacity = '1';
+    }
+  };
+
+  const handleMouseLeave = () => {
+    mouseRef.current = { x: -9999, y: -9999 };
+    if (cursorRef.current) cursorRef.current.style.opacity = '0';
+  };
+
   const allDone = collected.size === SKILLS.length;
   const pct     = (collected.size / SKILLS.length) * 100;
 
   return (
-    <div className="skill-container" ref={containerRef}>
+    <div className="skill-container" ref={containerRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+
+      {/* ── Cursor glow ── */}
+      <div className="sg-cursor-glow" ref={cursorRef} />
+
+      {/* ── Section heading ── */}
+      <h2 className="sg-section-title">Skills &amp; Technologies</h2>
 
       {/* ── Score bar ── */}
       <div className="sg-scorebar">

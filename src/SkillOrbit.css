@@ -1,53 +1,129 @@
+/* ── Section heading ── */
+.sg-section-title {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding-top: 2.5rem;
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #00ffff;
+  text-shadow:
+    0 0 8px #00ffff,
+    0 0 28px rgba(0, 255, 255, 0.5),
+    0 0 60px rgba(255, 0, 255, 0.25);
+  font-family: 'Courier New', monospace;
+}
+
 /* ── Container ── */
 .skill-container {
   position: relative;
   overflow: hidden;
   min-height: 680px;
   background:
-    radial-gradient(ellipse at 15% 25%, rgba(102, 126, 234, 0.13) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 75%, rgba(0, 230, 118, 0.09)  0%, transparent 55%),
-    radial-gradient(ellipse at 60% 10%, rgba(255, 109, 53, 0.08)  0%, transparent 45%),
-    radial-gradient(circle at center,  #0d0d1f 0%, #020208 100%);
+    radial-gradient(ellipse at 50% 110%, rgba(255, 0, 255, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% -10%, rgba(0, 255, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 50%, rgba(100, 0, 200, 0.12)  0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(0, 100, 255, 0.10)  0%, transparent 50%),
+    linear-gradient(180deg, #06000f 0%, #0a0020 60%, #12002a 100%);
 }
 
-/* Star field */
+/* Neon scrolling grid */
 .skill-container::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle, rgba(255,255,255,0.9)  1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.5)  1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.65) 1px, transparent 1px);
-  background-size: 450px 450px, 280px 280px, 700px 700px;
-  background-position: 0 0, 120px 180px, 250px 60px;
-  animation: star-drift 90s linear infinite;
+    linear-gradient(rgba(0, 255, 255, 0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.10) 1px, transparent 1px),
+    linear-gradient(rgba(255, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  animation: grid-scroll 4s linear infinite;
   pointer-events: none;
-  opacity: 0.35;
   z-index: 0;
 }
 
-@keyframes star-drift {
-  from { background-position: 0 0,      120px 180px, 250px 60px; }
-  to   { background-position: 450px 450px, 570px 630px, 950px 760px; }
+@keyframes grid-scroll {
+  from { background-position: 0 0, 0 0, 0 0, 0 0; }
+  to   { background-position: 0 50px, 0 0, 0 10px, 0 0; }
+}
+
+/* CRT scanlines */
+.skill-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: scanline-flicker 8s ease-in-out infinite;
+}
+
+@keyframes scanline-flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96%            { opacity: 0.85; }
+  97%            { opacity: 1; }
+  98%            { opacity: 0.9; }
+}
+
+/* ── Cursor glow ── */
+.sg-cursor-glow {
+  position: absolute;
+  top: -130px;
+  left: -130px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 255, 0.18) 0%,
+    rgba(255, 0, 255, 0.10) 40%,
+    transparent 70%
+  );
+}
+
+.sg-cursor-glow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00ffff;
+  box-shadow: 0 0 8px #00ffff, 0 0 20px #00ffff, 0 0 40px rgba(0, 255, 255, 0.5);
 }
 
 /* ── Score bar ── */
 .sg-scorebar {
   position: absolute;
-  top: 20px;
+  top: 5px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(10, 10, 20, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 20, 0.88);
+  border: 1px solid rgba(0, 255, 255, 0.25);
   border-radius: 30px;
   padding: 8px 20px;
   z-index: 100;
   backdrop-filter: blur(12px);
   white-space: nowrap;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.12), inset 0 0 12px rgba(0, 255, 255, 0.05);
 }
 
 .sg-score-label {
@@ -69,10 +145,10 @@
 
 .sg-score-fill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea, #f7971e, #ff004f);
+  background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
   border-radius: 4px;
   transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 0 8px rgba(102, 126, 234, 0.55);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
 }
 
 .sg-score-count {
