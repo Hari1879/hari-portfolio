@@ -9,6 +9,9 @@ function Header() {
   const location = useLocation();
   const [showHireModal, setShowHireModal] = useState(false);
   const [showHobbiesMenu, setShowHobbiesMenu] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => { setMenuOpen(false); setShowHobbiesMenu(false); };
 
   const handleResumeClick = (e) => {
     e.preventDefault();
@@ -41,11 +44,18 @@ function Header() {
           <span className="logo-red">Gnanavel</span>
         </div>
 
-        <nav className="nav">
-          <a href="/#about">About</a>
-          {/* <a href="#services">Services</a> */}
-          <a href="/#about" onClick={handleResumeClick}>Resume</a>
-          <a href="/#skills">Skills</a>
+        <button
+          className={`hamburger${menuOpen ? ' open' : ''}`}
+          onClick={() => setMenuOpen(v => !v)}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
+
+        <nav className={`nav${menuOpen ? ' nav--open' : ''}`}>
+          <a href="/#about" onClick={closeMenu}>About</a>
+          <a href="/#about" onClick={(e) => { closeMenu(); handleResumeClick(e); }}>Resume</a>
+          <a href="/#skills" onClick={closeMenu}>Skills</a>
           <div className="hobbies-nav-wrapper">
             <button
               className={`nav-link hobbies-nav-btn${location.pathname === '/hobbies' ? ' active' : ''}`}
@@ -53,11 +63,10 @@ function Header() {
             >
               Hobbies <span className={`hm-chevron${showHobbiesMenu ? ' open' : ''}`}>›</span>
             </button>
-            {showHobbiesMenu && <HobbiesMenu onClose={() => setShowHobbiesMenu(false)} />}
+            {showHobbiesMenu && <HobbiesMenu onClose={() => { setShowHobbiesMenu(false); closeMenu(); }} />}
           </div>
-          {/* <a href="#projects">Projects</a> */}
-          <a href="/#contact">Contact</a>
-          <button onClick={() => setShowHireModal(true)} className="hire-btn">Hire Me</button>
+          <a href="/#contact" onClick={closeMenu}>Contact</a>
+          <button onClick={() => { setShowHireModal(true); closeMenu(); }} className="hire-btn">Hire Me</button>
         </nav>
       </div>
     </header>

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+﻿import { useRef } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Header from "./header";
@@ -18,11 +18,11 @@ const placeData = {
     color: "#4facfe",
     hero: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1400&q=90",
     items: [
-      { type: "image", caption: "Dal Lake", span: "tall",  img: "https://lh3.googleusercontent.com/d/1jPgiPLmWtdbLkrPD9br-MY8x-L378VoeO" },
+      { type: "image", caption: "Dal Lake", span: "tall",  img: "https://drive.google.com/thumbnail?id=1jPgiPLmWtdbLkrPD9br-MY8x-L378VoeO&sz=w1200" },
       { type: "image", caption: "Gulmarg Meadows", span: "small", img: "https://images.unsplash.com/photo-1477346611705-65d1883cee1e?w=900&q=80" },
       { type: "quote",  text: "If there is paradise on earth, it is this, it is this, it is this.", author: "Emperor Jahangir" },
       { type: "image", caption: "Snow Peaks", span: "wide",  img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80" },
-      { type: "image", caption: "Saffron Fields", span: "small", img: "https://lh3.googleusercontent.com/d/1NweN0ajJvOGSeXsFUUnaGur7AIeC08Zf" },
+      { type: "image", caption: "Saffron Fields", span: "small", img: "https://drive.google.com/thumbnail?id=1NweN0ajJvOGSeXsFUUnaGur7AIeC08Zf&sz=w1200" },
       { type: "image", caption: "Pahalgam Valley", span: "tall",  img: "https://images.unsplash.com/photo-1534377075-38d9e14ce2dd?w=900&q=80" },
       { type: "quote",  text: "Kashmir is not just a place — it is a feeling you carry forever.", author: "" },
       { type: "image", caption: "Shikaras at Dusk", span: "wide",  img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80" },
@@ -91,16 +91,17 @@ const placeData = {
   6: {
     place: "Pondicherry",
     color: "#f093fb",
-    hero: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1400&q=90",
+    hero: "https://drive.google.com/thumbnail?id=19uK7InrrpaPlMDl77tELx5ZlsyQiWUcL&sz=w1400",
     items: [
-      { type: "image", caption: "French Quarter Lanes", span: "tall",  img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=900&q=80" },
-      { type: "image", caption: "Promenade Beach",      span: "small", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80" },
+      { type: "image", caption: "Pondicherry Vibes",    span: "tall",  img: "https://drive.google.com/thumbnail?id=19uK7InrrpaPlMDl77tELx5ZlsyQiWUcL&sz=w1200" },
+      { type: "image", caption: "Coastal Breeze",       span: "small", img: "https://drive.google.com/thumbnail?id=1wbPSWQItr21SJDL8MvYi1DkEUIpmB73R&sz=w1200" },
       { type: "quote",  text: "Paris of the East — every lane tells a story of two worlds.", author: "" },
-      { type: "image", caption: "Bougainvillea Walls",  span: "wide",  img: "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=900&q=80" },
-      { type: "image", caption: "Auroville",            span: "small", img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80" },
-      { type: "image", caption: "Temple Gopuram",       span: "tall",  img: "https://images.unsplash.com/photo-1621155346337-1d19476ba7d6?w=900&q=80" },
+      { type: "image", caption: "Seaside Stroll",       span: "wide",  img: "https://drive.google.com/thumbnail?id=1r4d9zMgjA8ySGPOxOg3wxEufXBXou0dD&sz=w1200" },
+      { type: "image", caption: "French Quarter",       span: "small", img: "https://drive.google.com/thumbnail?id=1TsNq6k51zcVv7s__fu54xe_-W4IWb19Y&sz=w1200" },
+      { type: "image", caption: "Promenade Walk",       span: "tall",  img: "https://drive.google.com/thumbnail?id=11QScfhwZLHVvE-6sa281suxKVPqYJTGV&sz=w1200" },
       { type: "quote",  text: "Not all classrooms have four walls — some have cobblestones and café tables.", author: "" },
-      { type: "image", caption: "Sunrise Seafront",     span: "wide",  img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=80" },
+      { type: "image", caption: "Tranquil Moments",     span: "wide",  img: "https://drive.google.com/thumbnail?id=1u0UqHn4O1oCRT1-qGc-Ph-BZfuxAUhGa&sz=w1200" },
+      { type: "image", caption: "Pondicherry Colours",  span: "small", img: "https://drive.google.com/thumbnail?id=1i9WZaRUB5z52yjj4wFxid1xRcCecYYMq&sz=w1200" },
     ],
   },
   7: {
@@ -151,16 +152,19 @@ const placeData = {
   10: {
     place: "Karnataka",
     color: "#f7971e",
-    hero: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1400&q=90",
+    hero: "https://drive.google.com/thumbnail?id=1p8Yesa_715usSf40L6jVNTVwtwc5eOTO&sz=w1400",
     items: [
-      { type: "image", caption: "Hampi Ruins",        span: "tall",  img: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=80" },
-      { type: "image", caption: "Coorg Hills",        span: "small", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" },
+      { type: "image", caption: "Karnataka Trails",   span: "tall",  img: "https://drive.google.com/thumbnail?id=1p8Yesa_715usSf40L6jVNTVwtwc5eOTO&sz=w1200" },
+      { type: "image", caption: "Into the Wild",      span: "small", img: "https://drive.google.com/thumbnail?id=1rMNE82W4VgWOq0zNqYwoDRfp5d3efmeZ&sz=w1200" },
       { type: "quote",  text: "Ruins are not a sign of decay, but of a life fully lived.", author: "" },
-      { type: "image", caption: "Mysore Palace",      span: "wide",  img: "https://images.unsplash.com/photo-1480714600823-b8f26d5b7e7c?w=900&q=80" },
-      { type: "image", caption: "Jog Falls",          span: "small", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80" },
-      { type: "image", caption: "Gokarna Beach",      span: "tall",  img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80" },
+      { type: "image", caption: "Golden Horizons",    span: "wide",  img: "https://drive.google.com/thumbnail?id=1x7F0-RLb4oR8rv3j-0ST9UUPkY6JYnSQ&sz=w1200" },
+      { type: "image", caption: "Hidden Paths",       span: "small", img: "https://drive.google.com/thumbnail?id=1oVpa_tDf4AImGTBHT6b5EuUIGcV7BiEv&sz=w1200" },
+      { type: "image", caption: "Ancient Glory",      span: "tall",  img: "https://drive.google.com/thumbnail?id=1XIvnojjdG1Vl5S24tgoHorzWBo1_y3rN&sz=w1200" },
+      { type: "image", caption: "Lush Greens",        span: "wide",  img: "https://drive.google.com/thumbnail?id=1l_EnefFhCVuun-IevS23FrgvAueAAJKU&sz=w1200" },
       { type: "quote",  text: "Coffee is a language in itself.", author: "Jackie Chan" },
-      { type: "image", caption: "Badami Caves",       span: "wide",  img: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&q=80" },
+      { type: "image", caption: "Land of Temples",    span: "tall",  img: "https://drive.google.com/thumbnail?id=1i60Iv9ybWSKFNspI7yGd--uUBYhINqfq&sz=w1200" },
+      { type: "image", caption: "Serene Escape",      span: "small", img: "https://drive.google.com/thumbnail?id=1d07Q0tdxJq8IHp8RhCeUugCHdQZ23P3C&sz=w1200" },
+      { type: "image", caption: "Karnataka Memories", span: "wide",  img: "https://drive.google.com/thumbnail?id=1bCTBo6ri1oD3MJ_PXl5pFf0zZDCv9zFL&sz=w1200" },
     ],
   },
   11: {

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+﻿import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Header from "./header";
 import FogEffect from "./FogEffect";
@@ -17,14 +17,14 @@ const items = [
     place: "Dal Lake", region: "Kashmir",
     span: "tall",
     color: "#4facfe",
-    img: "",
+    img: "https://lh3.googleusercontent.com/d/1tnbHPH90S373HlQvSGaXeE-7J8wmxqAN",
   },
   {
     type: "image", id: 2,
-    place: "Snow Peaks", region: "Kashmir",
+    place: "Saffron Fields", region: "Kashmir",
     span: "small",
     color: "#74c0fc",
-    img: "",
+    img: "https://lh3.googleusercontent.com/d/1mNO5uT-yqHkPjXjOw83knoqH-27oDSEr",
   },
   /* ── Quote 1 ── */
   {
@@ -38,21 +38,21 @@ const items = [
     place: "Living Root Bridge", region: "Meghalaya",
     span: "small",
     color: "#11998e",
-    img: "",
+    img: "https://lh3.googleusercontent.com/d/1OIRd2rajUxD9GFpuW3ZsqQBZIA6Fq0Z0" ,
   },
   {
     type: "image", id: 4,
-    place: "Cloud Valley", region: "Meghalaya",
+    place: "Cherrapunji Clouds", region: "Meghalaya",
     span: "tall",
     color: "#38d9a9",
-    img: "",
+    img: "https://lh3.googleusercontent.com/d/1RwcLlt7Tbzl_05jcwy80JbLJzHytEuNu" ,
   },
   {
     type: "image", id: 5,
     place: "Kaziranga", region: "Assam",
     span: "wide",
     color: "#f7971e",
-    img: "",
+    img: "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?w=900&q=80",
   },
   /* ── Quote 2 ── */
   {
@@ -66,21 +66,21 @@ const items = [
     place: "Backwaters", region: "Kerala",
     span: "tall",
     color: "#43e97b",
-    img: "",
+    img: "https://drive.google.com/thumbnail?id=1E3mvcOas1WKhoxS4ct4dPHkom9sE3lc3&sz=w1200",
   },
   {
     type: "image", id: 7,
     place: "Sunset Beach", region: "Goa",
     span: "small",
     color: "#ff6b35",
-    img: "",
+    img: "https://drive.google.com/thumbnail?id=1tpCPAxvRxIHdLH1HuXpDFo9qgyHV8KBM&sz=w1200",
   },
   {
     type: "image", id: 8,
     place: "Houseboat", region: "Kerala",
     span: "small",
     color: "#51cf66",
-    img: "",
+    img: "https://drive.google.com/thumbnail?id=1nwoJbUNJIG4SCZ_DK1j2r8FsHndIj2Wm&sz=w1200",
   },
   /* ── Quote 3 ── */
   {
@@ -91,24 +91,24 @@ const items = [
   /* ── Delhi / Chandigarh ── */
   {
     type: "image", id: 9,
-    place: "Old Delhi", region: "Delhi",
+    place: "Chandni Chowk", region: "Delhi",
     span: "wide",
     color: "#ff004f",
-    img: "",
+    img: "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=900&q=80",
   },
   {
     type: "image", id: 10,
     place: "Rock Garden", region: "Chandigarh",
     span: "tall",
     color: "#4facfe",
-    img: "",
+    img: "https://images.unsplash.com/photo-1597074866923-dc0589150358?w=900&q=80",
   },
   {
     type: "image", id: 11,
     place: "Red Fort", region: "Delhi",
     span: "small",
     color: "#e03131",
-    img: "",
+    img: "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=900&q=80",
   },
   /* ── Quote 4 ── */
   {
@@ -122,28 +122,28 @@ const items = [
     place: "Hampi Ruins", region: "Karnataka",
     span: "tall",
     color: "#f7971e",
-    img: "",
+    img: "https://drive.google.com/thumbnail?id=1p8Yesa_715usSf40L6jVNTVwtwc5eOTO&sz=w1200",
   },
   {
     type: "image", id: 13,
     place: "Meenakshi Temple", region: "Tamil Nadu",
     span: "small",
     color: "#c850c0",
-    img: "",
+    img: "https://images.unsplash.com/photo-1621155346337-1d19476ba7d6?w=900&q=80",
   },
   {
     type: "image", id: 14,
     place: "Charminar", region: "Telangana",
     span: "small",
     color: "#9c36b5",
-    img: "",
+    img: "https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=900&q=80",
   },
   {
     type: "image", id: 15,
     place: "Pondicherry Coast", region: "Pondicherry",
     span: "wide",
     color: "#f093fb",
-    img: "",
+    img: "https://drive.google.com/thumbnail?id=19uK7InrrpaPlMDl77tELx5ZlsyQiWUcL&sz=w1200",
   },
 ];
 

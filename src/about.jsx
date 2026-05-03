@@ -68,7 +68,12 @@ function About() {
             <Stat value={20} label="Projects Completed" />
             <Stat value={15} label="Technologies" />
           </div>
-          <button id="download-resume-btn" className="about-btn">Download Resume</button>
+          <a
+            href="/Harimurugavel__Gnanavel-Frontend_developer.pdf"
+            download="Harimurugavel__Gnanavel-Frontend_developer.pdf"
+            className="about-btn"
+            id="download-resume-btn"
+          >Download Resume</a>
         </div>
       </div>
     </section>

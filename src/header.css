@@ -123,3 +123,75 @@
 .hire-btn:hover {
   background: #e60045;
 }
+
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile nav ── */
+@media (max-width: 768px) {
+  .header { padding: 14px 24px; }
+
+  .hamburger { display: flex; }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: #0f0f0f;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 16px 24px 24px;
+    gap: 4px;
+    z-index: 999;
+  }
+
+  .nav--open { display: flex; }
+
+  .nav a,
+  .nav .hobbies-nav-btn {
+    padding: 12px 0;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav .nav-link {
+    margin: 8px 0 4px;
+    text-align: center;
+  }
+
+  .hire-btn {
+    margin-top: 8px;
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+  }
+}

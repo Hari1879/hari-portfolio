@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:aayushbharti.in)"
+      "WebFetch(domain:aayushbharti.in)",
+      "WebFetch(domain:drive.google.com)"
     ]
   }
 }

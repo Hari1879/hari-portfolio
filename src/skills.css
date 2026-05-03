@@ -316,3 +316,36 @@
   from { transform: rotateY(0deg); }
   to { transform: rotateY(360deg); }
 }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .skills-section {
+    padding: 80px 32px;
+  }
+
+  .skills-title { font-size: 30px; margin-bottom: 60px; }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 24px;
+  }
+
+  .skill-card { padding: 24px 14px; }
+
+  .skill-icon { font-size: 38px; }
+}
+
+@media (max-width: 480px) {
+  .skills-section { padding: 60px 16px; }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .skill-card { padding: 18px 10px; }
+
+  .skill-icon { font-size: 32px; }
+
+  .detail-card { width: 90vw; padding: 28px 20px; }
+}

@@ -546,6 +546,7 @@
 .ai-note p span { font-weight: 700; color: #f7971e; }
 
 .about-btn {
+  display: inline-block;
   padding: 12px 24px;
   background: #ff004f;
   border: none;
@@ -553,6 +554,9 @@
   color: #fff;
   cursor: pointer;
   transition: 0.3s ease;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 .about-btn:hover { background: #e60045; }
@@ -568,4 +572,73 @@
   45%  { transform: scale(0.9) translateY(1px); box-shadow: 0 0 0 18px rgba(255, 0, 79, 0.15), 0 0 40px rgba(255, 0, 79, 0.45); }
   70%  { transform: scale(1.03); box-shadow: 0 0 0 8px rgba(255, 0, 79, 0.1); }
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 79, 0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .about {
+    padding: 80px 32px 60px;
+  }
+
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .photo-carousel {
+    width: 300px;
+    height: 380px;
+  }
+
+  .carousel-card {
+    width: 220px;
+    height: 290px;
+  }
+
+  .about-content {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .about-content h2 { font-size: 28px; }
+
+  .about-stats {
+    gap: 28px;
+    justify-content: center;
+  }
+
+  .ai-cert-section {
+    padding: 60px 24px;
+  }
+
+  .ai-cert-title { font-size: 30px; }
+
+  .ai-cert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-note {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about { padding: 60px 20px 40px; }
+
+  .photo-carousel {
+    width: 260px;
+    height: 330px;
+  }
+
+  .carousel-card {
+    width: 190px;
+    height: 250px;
+  }
+
+  .about-stats { gap: 20px; }
+
+  .rolling-number { font-size: 36px; }
+
+  .ai-note-header { flex-direction: column; align-items: flex-start; }
 }

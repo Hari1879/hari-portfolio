@@ -224,3 +224,16 @@
   color: #ff004f;
   transform: translateY(-3px);
 }
+
+@media (max-width: 480px) {
+  .hire-card {
+    padding: 28px 20px 24px;
+    border-radius: 18px;
+  }
+
+  .hire-intro h2 { font-size: 17px; }
+
+  .hire-option { padding: 11px 12px; gap: 10px; }
+
+  .hire-opt-icon { width: 32px; height: 32px; font-size: 15px; }
+}
