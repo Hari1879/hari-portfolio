@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 580" shape-rendering="geometricPrecision">
+  <!--
+    Projection: x = (lon - 68) / 29.5 * 500
+                y = (37  - lat) / 29  * 580
+    Boundary  : lon 68–97.5°E, lat 8–37°N
+  -->
+  <defs>
+    <linearGradient id="bg" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%"   stop-color="#1e5296" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#071828" stop-opacity="0.88"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- India mainland — clockwise from J&K NW corner -->
+  <path
+    fill="url(#bg)"
+    stroke="#5ab4ff"
+    stroke-width="1.6"
+    stroke-linejoin="round"
+    filter="url(#glow)"
+    d="
+      M 100,0
+      C 118,0  138,12  153,30
+      C 165,44  172,66  186,90
+      L 205,130
+      C 222,158  238,174  254,182
+      L 298,188
+      L 339,190
+      L 398,194
+      C 432,172  462,158  492,160
+      C 476,180  460,206  458,218
+      L 446,264
+      C 436,278  428,288  420,294
+      C 406,285  394,280  382,286
+      C 368,292  354,300  342,306
+      C 326,312  316,326  316,348
+      C 314,366  316,382  310,408
+      C 302,424  282,434  264,442
+      C 246,450  232,456  222,468
+      C 212,480  208,494  206,508
+      C 200,524  184,544  161,578
+      C 152,562  142,555  136,558
+      C 124,563  122,552  120,500
+      C 112,480  104,450   98,438
+      C  90,420   86,400   84,380
+      C  78,350   72,330   66,296
+      L  30,290
+      C  18,306   20,318   42,298
+      C  52,288   64,274   72,260
+      L  58,254
+      C  30,250    8,246    6,240
+      C  10,228   22,216   32,208
+      C  38,198   44,190   56,186
+      C  68,182   78,174   78,156
+      C  78,134   78,112   79,92
+      C  80,66    88,40   100,14
+      Z
+    "
+  />
+
+  <!-- Andaman & Nicobar -->
+  <ellipse cx="447" cy="385" rx="5" ry="22" fill="url(#bg)" stroke="#5ab4ff" stroke-width="1.2"/>
+
+  <!-- Sri Lanka -->
+  <ellipse cx="190" cy="564" rx="9" ry="12" fill="url(#bg)" stroke="#5ab4ff" stroke-width="1"/>
+
+  <!-- Lakshadweep -->
+  <circle cx="68" cy="456" r="3.5" fill="url(#bg)" stroke="#5ab4ff" stroke-width="0.8"/>
+</svg>
+
+  <!-- Main India outline (clockwise from NW J&K) -->
+  <!-- Projection: x=(lon-68)/29.5*500, y=(37-lat)/29*580 -->
+  <path filter="url(#glow)" fill="url(#fill)" stroke="rgba(100,180,255,0.55)" stroke-width="1.8" stroke-linejoin="round"
+    d="
+      M 93,2
+      C 110,0 130,8 152,30
+      C 160,42 175,52 203,130
+      C 215,158 228,175 256,188
+      C 290,196 320,192 348,190
+      C 370,186 420,168 492,160
+      C 480,172 465,196 458,210
+      C 450,226 449,244 449,250
+      C 442,268 432,280 424,290
+      C 410,282 398,280 388,284
+      C 374,290 360,298 348,300
+      C 336,308 326,316 322,320
+      C 318,332 318,360 322,380
+      C 318,400 282,418 249,430
+      C 237,434 224,440 215,452
+      C 208,462 208,474 212,490
+      C 205,506 185,524 163,578
+      C 155,566 147,556 141,560
+      C 132,568 128,572 127,500
+      C 122,490 112,474 102,440
+      C 96,420 90,400 88,380
+      C 84,358 80,342 76,330
+      C 58,336 34,330 34,330
+      C 28,320 36,308 68,300
+      C 72,292 76,282 85,270
+      C 60,264 19,258 8,250
+      C 10,238 22,226 26,212
+      C 26,200 28,192 36,190
+      C 46,188 60,186 68,180
+      C 72,172 76,162 76,140
+      C 76,120 80,102 80,80
+      C 82,60 86,42 93,20
+      Z
+    "
+  />
+
+  <!-- Andaman & Nicobar Islands -->
+  <ellipse cx="440" cy="390" rx="5" ry="18" fill="url(#fill)" stroke="rgba(100,180,255,0.4)" stroke-width="1.2"/>
+
+  <!-- Sri Lanka -->
+  <ellipse cx="200" cy="565" rx="8" ry="11" fill="url(#fill)" stroke="rgba(100,180,255,0.35)" stroke-width="1"/>
+</svg>

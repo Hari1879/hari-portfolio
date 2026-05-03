@@ -1,0 +1,125 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  background: #0f0f0f;
+  padding: 18px 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.logo-white {
+  color: #ffffff;
+}
+
+.logo-red {
+  color: #ff004f;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav a:hover {
+  color: #ff004f;
+}
+
+.nav .nav-link {
+  color: #ff004f;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.3s ease;
+  background: rgba(255, 0, 79, 0.12);
+  border: 1px solid rgba(255, 0, 79, 0.45);
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+
+.nav .nav-link:hover {
+  background: rgba(255, 0, 79, 0.25);
+  border-color: #ff004f;
+  color: #ff004f;
+}
+
+.nav .nav-link.active {
+  background: #ff004f;
+  border-color: #ff004f;
+  color: #fff;
+}
+
+/* Hobbies nav wrapper — anchor for the dropdown */
+.hobbies-nav-wrapper {
+  position: relative;
+}
+
+/* Hobbies nav button */
+.hobbies-nav-btn {
+  background: none;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hm-chevron {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+  transform: rotate(90deg);
+}
+
+.hm-chevron.open {
+  transform: rotate(-90deg);
+}
+
+/* Hire Me Button */
+.hire-btn {
+  background: #ff004f;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.hire-btn:hover {
+  background: #e60045;
+}

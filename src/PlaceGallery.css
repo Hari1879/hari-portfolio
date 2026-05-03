@@ -1,0 +1,380 @@
+/* ══════════════════════════════════════════════════════╗
+   PlaceGallery.css  —  per-destination photo diary
+╚══════════════════════════════════════════════════════ */
+
+/* ── Snowfall ─────────────────────────────────────────── */
+.snow-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.snow-flake {
+  position: absolute;
+  top: -12px;
+  border-radius: 50%;
+  background: #fff;
+  filter: blur(0.6px);
+  animation-name: snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  animation-delay: 0s;
+}
+
+@keyframes snowfall {
+  0%   { transform: translate(0px, -10px); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translate(var(--sway, 0px), 105vh); opacity: 0; }
+}
+
+/* ── Rain ─────────────────────────────────────────────── */
+.rain-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.rain-drop {
+  position: absolute;
+  top: -60px;
+  width: 1.5px;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(to bottom, rgba(174,214,241,0), rgba(174,214,241,0.85));
+  animation-name: rainfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-delay: 0s;
+}
+
+@keyframes rainfall {
+  0%   { transform: translate(0px, -60px) rotate(15deg); opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 0.7; }
+  100% { transform: translate(var(--drift, 30px), 105vh) rotate(15deg); opacity: 0; }
+}
+
+/* ── Hero ─────────────────────────────────────────────── */
+.pg-hero {
+  position: relative;
+  height: 88vh;
+  min-height: 520px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.pg-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.pg-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.45) 40%,
+    rgba(0, 0, 0, 0.18) 100%
+  );
+}
+
+/* ── Hero content ── */
+.pg-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 6vw 7vh;
+  width: 100%;
+}
+
+.pg-hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent, #ff004f);
+  margin-bottom: 0.6rem;
+  display: block;
+  opacity: 0.9;
+}
+
+.pg-hero-title-wrap {
+  display: flex;
+  gap: 0.02em;
+  overflow: visible;
+  margin-bottom: 1rem;
+}
+
+.pg-hero-char {
+  font-family: "Bebas Neue", "Impact", "Arial Narrow", sans-serif;
+  font-size: clamp(4.5rem, 14vw, 11rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  display: inline-block;
+}
+
+.pg-hero-line {
+  height: 2px;
+  width: min(180px, 35%);
+  transform-origin: left;
+  margin-bottom: 1.8rem;
+  border-radius: 1px;
+}
+
+.pg-back {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+.pg-back:hover {
+  color: #fff;
+  border-color: var(--accent, #ff004f);
+}
+
+/* ── Masonry grid ─────────────────────────────────────── */
+.pg-grid {
+  padding: 4vw 5vw 5vw;
+  column-count: 2;
+  column-gap: 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .pg-grid {
+    column-count: 1;
+  }
+}
+
+/* ── Quote (full-width) ── */
+.pg-quote {
+  column-span: all;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5vw 10vw;
+  text-align: center;
+}
+
+.pg-quote-bar {
+  display: block;
+  width: min(240px, 45%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent, #ff004f), transparent);
+  margin-bottom: 2rem;
+  transform-origin: left;
+}
+
+.pg-quote blockquote {
+  font-size: clamp(1.1rem, 3vw, 1.85rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+  max-width: 760px;
+  letter-spacing: 0.01em;
+  margin: 0 0 1rem;
+}
+
+.pg-quote cite {
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+  font-style: normal;
+}
+
+/* ── Tiles ──────────────────────────────────────────────── */
+.pg-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 1.2rem;
+  break-inside: avoid;
+  background: #111;
+  cursor: default;
+}
+
+.pg-tile--tall  { height: 500px; }
+.pg-tile--wide  { height: 340px; }
+/* .pg-tile--small { height: 265px; } */
+
+@media (max-width: 900px) {
+  .pg-tile--tall  { height: 420px; }
+  .pg-tile--wide  { height: 280px; }
+  /* .pg-tile--small { height: 220px; } */
+}
+
+.pg-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.85s ease;
+}
+
+.pg-tile:hover img {
+  transform: scale(1.055);
+}
+
+/* ── Placeholder ── */
+.pg-tile-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.07));
+}
+
+.pg-tile-plus {
+  font-size: 2.2rem;
+  color: var(--tile-color);
+  opacity: 0.3;
+}
+
+.pg-tile-add {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.18);
+}
+
+/* ── Overlay + caption ── */
+.pg-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0) 55%);
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+
+.pg-tile:hover .pg-tile-overlay {
+  opacity: 0.7;
+}
+
+.pg-tile-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.1rem 1rem;
+  transform: translateY(5px);
+  transition: transform 0.42s ease;
+}
+
+.pg-tile:hover .pg-tile-caption {
+  transform: translateY(0);
+}
+
+.pg-tile-name {
+  font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+  display: block;
+}
+
+/* Accent bar on left edge */
+.pg-tile::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 3px;
+  background: var(--tile-color, #ff004f);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.42s ease;
+  z-index: 2;
+}
+.pg-tile:hover::before {
+  transform: scaleY(1);
+}
+
+/* ── Bottom CTA ─────────────────────────────────────────── */
+.pg-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 3vw 5vw 2vw;
+}
+
+.pg-cta-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.55);
+  padding: 9px 20px;
+  border-radius: 24px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
+}
+
+.pg-cta-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.pg-cta-btn--gallery:hover {
+  color: #fff;
+  border-color: var(--accent, #ff004f);
+  background: rgba(255, 0, 79, 0.06);
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+.pg-footer {
+  text-align: center;
+  padding: 2.5rem 0 3.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.14);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 0 5vw;
+}
+
+/* ── Not found ── */
+.pg-notfound {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+}
+
+.pg-notfound button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}

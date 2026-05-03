@@ -1,0 +1,87 @@
+.tilt-card:hover .skill-card {
+  box-shadow: 0 20px 40px rgba(255, 0, 79, 0.4);
+}
+
+section[id] {
+  scroll-margin-top: 95px;
+}
+
+/* Scroll Down Button - Clean Minimalist Style */
+.scroll-down-container {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+}
+
+.scroll-down-btn {
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.scroll-down-btn:hover {
+  transform: translateY(-8px);
+}
+
+/* Mouse Scroll Icon */
+.mouse-scroll {
+  width: 26px;
+  height: 45px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  transition: all 0.3s ease;
+}
+
+.scroll-down-btn:hover .mouse-scroll {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* The wheel/dot that bounces */
+.mouse-scroll-wheel {
+  width: 3px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+  animation: mouse-wheel-scroll 1.5s infinite;
+}
+
+@keyframes mouse-wheel-scroll {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse animation for the container */
+.mouse-scroll {
+  animation: mouse-scroll-pulse 2s infinite;
+}
+
+@keyframes mouse-scroll-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1);
+  }
+}
+
+#root {
+      background: radial-gradient(circle at 50% 30%, #111114, #0b0b0c 70%);
+}

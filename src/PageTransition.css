@@ -1,0 +1,93 @@
+/* ── Full-screen transition overlay ──────────────────────────────── */
+.pt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0b0b0c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: all;
+}
+
+/* Subtle grain texture */
+.pt-noise {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+/* "hari" wordmark wrapper — clips overflow for slide-in/out */
+.pt-wordmark-wrap {
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+/* Base text */
+.pt-wordmark {
+  display: block;
+  font-size: clamp(3.5rem, 11vw, 8rem);
+  font-weight: 900;
+  text-transform: lowercase;
+  font-style: italic;
+  letter-spacing: 0.22em;
+  user-select: none;
+  /* Gradient background used for the shine sweep */
+  background: linear-gradient(
+    105deg,
+    rgba(255,255,255,0.18) 0%,
+    rgba(255,255,255,0.18) 30%,
+    rgba(255,255,255,1)    46%,
+    rgba(255,255,255,1)    54%,
+    rgba(255,255,255,0.18) 70%,
+    rgba(255,255,255,0.18) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 100% 0;  /* shine starts off to the right */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Slide up from below */
+  animation: pt-slide-in 0.55s cubic-bezier(0.76,0,0.24,1) 0.1s both,
+             pt-shine    0.9s cubic-bezier(0.4,0,0.2,1)    0.3s both;
+}
+
+/* Exit state — clip up */
+.pt-wordmark--out {
+  animation: pt-slide-out 0.45s cubic-bezier(0.76,0,0.24,1) 0s both;
+}
+
+/* Clip-in from bottom */
+@keyframes pt-slide-in {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+
+/* Clip-out to top */
+@keyframes pt-slide-out {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-115%); }
+}
+
+/* Shine sweep: move gradient left-to-right across the text */
+@keyframes pt-shine {
+  from { background-position: 140% 0; }
+  to   { background-position: -40% 0; }
+}
+
+/* Progress bar at the bottom edge */
+.pt-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #ff6b35, #ff004f);
+  transform-origin: left center;
+}

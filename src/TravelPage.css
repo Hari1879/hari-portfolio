@@ -1,0 +1,479 @@
+/* ── Travel Page Layout ─────────────────────────────────────────────── */
+.tp-section {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background: #0b0b0c;
+  cursor: grab;
+  user-select: none;
+}
+.tp-section:active { cursor: grabbing; }
+
+/* Full-bleed blurred background image */
+.tp-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(18px) brightness(0.35);
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+.tp-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(11, 11, 12, 0.92) 0%,
+    rgba(11, 11, 12, 0.5) 50%,
+    rgba(11, 11, 12, 0.1) 100%
+  );
+  z-index: 1;
+}
+
+/* ── Left panel ──────────────────────────────────────────────────────── */
+.tp-left {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 40px 60px;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  z-index: 2;
+  gap: 0;
+}
+
+.tp-back {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  width: fit-content;
+  margin-bottom: 36px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.tp-back:hover {
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
+/* ── Gallery CTA ── */
+.tp-gallery-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.55);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 7px 14px 7px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  width: fit-content;
+  margin-bottom: 28px;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
+}
+.tp-gallery-link:hover {
+  color: #fff;
+  border-color: rgba(255,0,79,0.55);
+  background: rgba(255,0,79,0.07);
+}
+
+.tp-sub {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 12px;
+}
+
+.tp-heading {
+  font-size: clamp(2.4rem, 3.5vw, 3.4rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+}
+
+.tp-counter {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+}
+.tp-count-active { color: #ff6b35; font-size: 18px; }
+.tp-count-sep    { color: rgba(255,255,255,0.25); margin: 0 4px; }
+.tp-count-total  { color: rgba(255,255,255,0.4); }
+
+.tp-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.tp-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  padding: 0;
+}
+.tp-btn svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.tp-btn:hover:not(:disabled) {
+  background: rgba(255, 107, 53, 0.2);
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+.tp-btn:disabled { opacity: 0.25; cursor: default; }
+
+/* Animated bounce on the Next chevron */
+.tp-btn--next:not(:disabled) svg {
+  animation: tp-chevron-bounce 1.4s ease-in-out infinite;
+}
+@keyframes tp-chevron-bounce {
+  0%, 100% { transform: translateX(0);   opacity: 1; }
+  40%       { transform: translateX(4px); opacity: 0.7; }
+  60%       { transform: translateX(2px); opacity: 0.9; }
+}
+/* Prev mirror */
+.tp-btn--prev:not(:disabled):hover svg {
+  animation: tp-chevron-bounce-left 0.4s ease-out;
+}
+@keyframes tp-chevron-bounce-left {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+.tp-dots {
+  display: flex;
+  gap: 8px;
+}
+.tp-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s, transform 0.25s;
+}
+.tp-dot--active {
+  transform: scale(1.4);
+}
+
+/* ── Right panel ─────────────────────────────────────────────────────── */
+.tp-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 60px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────── */
+.tp-card {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+  border-top: 2px solid var(--card-color, #ff6b35);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.tp-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+.tp-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.tp-card:hover .tp-card-img { transform: scale(1.04); }
+
+.tp-card-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(11, 11, 12, 0.85) 100%);
+}
+
+.tp-card-info {
+  padding: 24px 28px 28px;
+}
+
+.tp-card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--card-color, #ff6b35);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tp-card-place {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 4px;
+  letter-spacing: -0.025em;
+}
+
+.tp-card-country {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.tp-card-desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.75;
+  max-width: 46ch;
+  margin-bottom: 18px;
+}
+
+.tp-card-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: 1px solid var(--card-color, #ff6b35);
+  color: var(--card-color, #ff6b35);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.tp-card-view:hover {
+  background: var(--card-color, #ff6b35);
+  color: #0b0b0c;
+}
+
+.tp-card-number {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 80px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tp-card-glow {
+  position: absolute;
+  bottom: -40px;
+  right: -30px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  opacity: 0.12;
+  filter: blur(55px);
+  pointer-events: none;
+}
+
+/* ── Peek label ──────────────────────────────────────────────────────── */
+.tp-peek {
+  position: absolute;
+  right: 20px;
+  bottom: 40px;
+  opacity: 0.35;
+}
+.tp-peek-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+
+/* ── India Map slide ─────────────────────────────────────────────────── */
+.tp-map-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.tp-map-wrap {
+  position: relative;
+  width: min(480px, 92%);
+  aspect-ratio: 500 / 600;
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+.tp-map-svg,
+.tp-map-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.tp-map-shape {
+  fill: url(#indiaGlow);
+  stroke: rgba(100, 180, 255, 0.45);
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+  filter: url(#mapGlow);
+}
+
+.tp-map-island {
+  fill: rgba(30, 74, 127, 0.65);
+  stroke: rgba(100, 180, 255, 0.3);
+  stroke-width: 0.4;
+}
+
+.tp-map-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tp-map-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s;
+}
+
+.tp-map-pin:hover .tp-map-dot {
+  transform: scale(1.6);
+}
+
+.tp-map-pulse {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  opacity: 0.5;
+  animation: tp-pulse 2s ease-out infinite;
+  z-index: 1;
+}
+
+@keyframes tp-pulse {
+  0%   { transform: scale(0.7); opacity: 0.6; }
+  70%  { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(0.7); opacity: 0; }
+}
+
+.tp-map-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 20;
+  text-transform: uppercase;
+}
+
+.tp-map-start {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 12px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.tp-map-start:hover {
+  background: rgba(255, 107, 53, 0.15);
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
+.tp-dot--map {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+@media (max-width: 860px) {
+  .tp-section { flex-direction: column; cursor: default; }
+  .tp-left {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 90px 24px 32px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+  }
+  .tp-back { margin-bottom: 0; width: 100%; }
+  .tp-heading { font-size: 2rem; margin-bottom: 0; }
+  .tp-right { padding: 32px 20px 60px; }
+  .tp-card-img-wrap { height: 220px; }
+}

@@ -1,0 +1,318 @@
+.skills-section {
+  min-height: 100vh;
+  padding: 120px 60px;
+  background: linear-gradient(135deg, #0f0f0f, #161616);
+  color: #fff;
+}
+
+.skills-title {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 90px;
+  font-weight: 600;
+}
+
+.category-section {
+  margin-bottom: 80px;
+}
+
+.category-title {
+  font-size: 22px;
+  margin-bottom: 40px;
+  color: #ff004f;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.category-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #ff004f;
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 40px;
+}
+
+
+.skill-card {
+  background: #1a1a1a;
+  padding: 30px 20px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #222;
+  transition: all 0.35s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  border-color: #ff004f;
+  box-shadow: 0 15px 35px rgba(255, 0, 79, 0.3);
+}
+
+.skill-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.15);
+}
+
+.skill-card p {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+
+/* spin Starts */
+
+/* .spin-section {
+  height: 100vh;
+  background: radial-gradient(circle at center, #140015, #0f0f0f);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.spin-section h2 {
+  font-size: 40px;
+  margin-bottom: 60px;
+}
+
+
+.spin-container {
+  perspective: 1000px;
+}
+
+.spin-circle {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  animation: rotateCircle 20s linear infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 40px;
+  transform-origin: 0 0;
+  transition: transform 0.3s ease;
+}
+
+.spin-item:hover {
+  transform: scale(1.3) !important;
+  color: #ff004f;
+}
+ */
+/* Overlay and Blur Effect */
+.orbit-container.blurred {
+  filter: blur(4px) brightness(0.5);
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.detail-card-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.3s ease;
+}
+
+/* The Glassmorphism Card */
+.detail-card {
+  background: rgba(25, 10, 20, 0.85);
+  border: 1px solid rgba(255, 0, 79, 0.5);
+  backdrop-filter: blur(20px);
+  padding: 40px;
+  border-radius: 24px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(255, 0, 79, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+  position: relative;
+  animation: slideUp 0.5s cubic-bezier(0.17, 0.8, 0.3, 1.2);
+}
+
+.card-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 15px #ff004f);
+}
+
+.detail-card h3 {
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.detail-card p {
+  color: #ccc;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* Buttons */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #ff004f;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.close-btn:hover { transform: scale(1.2); }
+
+.action-btn {
+  background: #ff004f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  background: #ff3377;
+  box-shadow: 0 0 20px rgba(255, 0, 79, 0.6);
+}
+
+/* Animations */
+.orbit-ring.paused {
+  animation-play-state: paused;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px) scale(0.9); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+/* 3. Apply to Grid Icons (Hover Flip) */
+.skill-icon {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.skill-card:hover .skill-icon {
+  transform: rotateY(360deg) scale(1.2); /* Full flip on hover */
+  color: #ff004f;
+}
+
+/* Optional: Add a "floating" effect to the orbit icons to make them feel organic */
+@keyframes floating {
+  0% { margin-top: 0px; }
+  50% { margin-top: -10px; }
+  100% { margin-top: 0px; }
+}
+
+.orbit-item {
+  animation: local-spin 6s linear infinite, floating 3s ease-in-out infinite;
+}
+
+
+/* Glassmorphism Card Style */
+.skill-card {
+  background: rgba(255, 255, 255, 0.03); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* The "frosted glass" effect */
+  -webkit-backdrop-filter: blur(10px); 
+  padding: 30px 20px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.skill-card:hover::before {
+  left: 100%;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 0, 79, 0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+              0 0 20px rgba(255, 0, 79, 0.2);
+}
+
+/* Icon Flip Animation */
+.skill-icon {
+  display: inline-block;
+  font-size: 50px;
+  margin-bottom: 15px;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+}
+
+.skill-card:hover .skill-icon {
+  transform: rotateY(360deg); /* The flip */
+}
+
+/* Orbit Icon wrapper for independent rotation */
+.icon-wrapper-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: local-spin 5s linear infinite;
+}
+
+@keyframes local-spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}

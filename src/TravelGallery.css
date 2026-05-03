@@ -1,0 +1,264 @@
+/* ══════════════════════════════════════════════════════╗
+   TravelGallery.css
+╚══════════════════════════════════════════════════════ */
+
+/* ── Hero ─────────────────────────────────────────────── */
+.tg-hero {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12vh 5vw 6vh;
+  text-align: center;
+  position: relative;
+}
+
+.tg-hero-eyebrow {
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent, #ff004f);
+  margin-bottom: 0.5rem;
+  opacity: 0.85;
+}
+
+.tg-hero-title-wrap {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  gap: 0.04em;
+}
+
+.tg-hero-char {
+  font-family: "Bebas Neue", "Impact", "Arial Narrow", sans-serif;
+  font-size: clamp(5rem, 18vw, 13rem);
+  font-weight: 900;
+  line-height: 0.9;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  display: inline-block;
+  will-change: transform;
+}
+
+.tg-hero-line {
+  height: 2px;
+  width: min(400px, 75%);
+  background: var(--accent, #ff004f);
+  transform-origin: left center;
+  margin: 1.4rem auto 0;
+}
+
+.tg-hero-sub {
+  margin-top: 1rem;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.tg-back {
+  margin-top: 2.5rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.55);
+  padding: 0.45rem 1.2rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+.tg-back:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* ── Grid ─────────────────────────────────────────────── */
+.tg-grid {
+  padding: 4vw 5vw 6vw;
+  column-count: 2;
+  column-gap: 1.4rem;
+}
+
+@media (max-width: 640px) {
+  .tg-grid {
+    column-count: 1;
+  }
+}
+
+/* Quotes must span full width */
+.tg-quote {
+  column-span: all;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5vw 8vw;
+  text-align: center;
+  position: relative;
+}
+
+.tg-quote-mark {
+  display: block;
+  width: min(280px, 50%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent, #ff004f), transparent);
+  margin-bottom: 2.4rem;
+  transform-origin: left center;
+}
+
+.tg-quote blockquote {
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.55;
+  max-width: 780px;
+  letter-spacing: 0.015em;
+  margin: 0 0 1.2rem;
+}
+
+.tg-quote cite {
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  font-style: normal;
+}
+
+/* ── Tile card ────────────────────────────────────────── */
+.tg-tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 1.4rem;
+  break-inside: avoid;
+  cursor: pointer;
+  background: #111;
+}
+
+/* Heights by span type */
+.tg-tile--tall     { height: 520px; }
+.tg-tile--small    { height: 280px; }
+.tg-tile--wide     { height: 360px; }
+
+@media (max-width: 900px) {
+  .tg-tile--tall  { height: 420px; }
+  .tg-tile--small { height: 230px; }
+  .tg-tile--wide  { height: 290px; }
+}
+
+.tg-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.75s ease;
+}
+
+.tg-tile:hover img {
+  transform: scale(1.06);
+}
+
+/* ── Placeholder ── */
+.tg-tile-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.4s;
+}
+
+.tg-tile-placeholder-icon {
+  font-size: 2rem;
+  color: var(--tile-color, #fff);
+  opacity: 0.35;
+}
+
+.tg-tile-placeholder-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ── Dark overlay that lightens on hover ── */
+.tg-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 50%);
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.tg-tile:hover .tg-tile-overlay {
+  opacity: 0.65;
+}
+
+/* ── Caption (slides up on hover) ── */
+.tg-tile-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  transform: translateY(6px);
+  transition: transform 0.45s ease;
+}
+
+.tg-tile:hover .tg-tile-caption {
+  transform: translateY(0);
+}
+
+.tg-tile-place {
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.tg-tile-region {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tile-color, rgba(255,255,255,0.6));
+  opacity: 0.8;
+}
+
+/* ── Accent line on tile left edge ── */
+.tg-tile::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--tile-color, #ff004f);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.45s ease;
+}
+
+.tg-tile:hover::after {
+  transform: scaleY(1);
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+.tg-footer {
+  text-align: center;
+  padding: 3rem 0 4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin: 0 5vw;
+}
