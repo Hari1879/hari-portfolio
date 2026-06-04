@@ -31,16 +31,21 @@ export default function ScrollVideoHero({ onDone }) {
     vid2.load();
     document.body.style.overflow = "hidden";
 
+    // Prime both decoders: play→pause forces the browser to initialise
+    // the video pipeline so currentTime seeks actually render frames.
+    const prime = (vid) =>
+      vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
+    prime(vid1);
+    prime(vid2);
+
     const applyProgress = (p) => {
       // ── Video 1 scrub ──
-      if (p <= 0.55) {
-        const t = Math.min(1, p / 0.5);
-        if (vid1.readyState >= 1 && vid1.duration) vid1.currentTime = t * vid1.duration;
+      if (vid1.duration) {
+        vid1.currentTime = Math.min(1, p / 0.5) * vid1.duration;
       }
-      // ── Video 2 scrub ──
-      if (p >= 0.45) {
-        const t = Math.min(1, (p - 0.5) / 0.5);
-        if (vid2.readyState >= 1 && vid2.duration) vid2.currentTime = Math.max(0, t) * vid2.duration;
+      // ── Video 2 scrub (pre-seek from p=0.45 so frames are ready) ──
+      if (p >= 0.45 && vid2.duration) {
+        vid2.currentTime = Math.max(0, Math.min(1, (p - 0.5) / 0.5)) * vid2.duration;
       }
       // ── Cross-fade: 0.45 → 0.55 overlap zone ──
       if (p <= 0.45) {
@@ -50,7 +55,7 @@ export default function ScrollVideoHero({ onDone }) {
         vid1.style.opacity = "0";
         vid2.style.opacity = "1";
       } else {
-        const blend = (p - 0.45) / 0.1;          // 0 → 1 across the overlap
+        const blend = (p - 0.45) / 0.1;
         vid1.style.opacity = String(1 - blend);
         vid2.style.opacity = String(blend);
       }

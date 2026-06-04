@@ -85,3 +85,123 @@ section[id] {
 #root {
       background: radial-gradient(circle at 50% 30%, #111114, #0b0b0c 70%);
 }
+
+/* ══════════════════════════════════════════
+   HIRE ME FLOATING PROMPT
+══════════════════════════════════════════ */
+.hmp-wrap {
+  position: fixed;
+  bottom: 36px;
+  right: 36px;
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+
+  /* hidden off-screen until visible */
+  opacity: 0;
+  transform: translateY(60px) scale(0.85);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.hmp-wrap--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ── Dismiss × ── */
+.hmp-dismiss {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  align-self: flex-end;
+  margin-right: 2px;
+}
+.hmp-dismiss:hover {
+  background: rgba(255, 0, 79, 0.18);
+  color: #fff;
+  border-color: rgba(255, 0, 79, 0.4);
+}
+
+/* ── Main button ── */
+.hmp-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Pulsing rings */
+.hmp-pulse-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50px;
+  border: 2px solid rgba(255, 0, 79, 0.6);
+  animation: hmp-ring 2.2s ease-out infinite;
+  pointer-events: none;
+}
+.hmp-pulse-ring--delay {
+  animation-delay: 1.1s;
+}
+
+@keyframes hmp-ring {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  100% { transform: scale(1.55); opacity: 0;   }
+}
+
+/* Inner pill */
+.hmp-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff004f, #ff4f8b);
+  box-shadow:
+    0 8px 28px rgba(255, 0, 79, 0.5),
+    0 2px  8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.hmp-btn:hover .hmp-inner {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow:
+    0 14px 36px rgba(255, 0, 79, 0.65),
+    0 4px  12px rgba(0, 0, 0, 0.4);
+}
+.hmp-btn:active .hmp-inner {
+  transform: scale(0.97);
+}
+
+.hmp-emoji {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.hmp-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .hmp-wrap { bottom: 20px; right: 20px; }
+}
