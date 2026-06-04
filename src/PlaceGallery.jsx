@@ -278,11 +278,14 @@ function QuoteBlock({ item }) {
   );
 }
 
+const UPLOADED_THROUGH = 6; // Pondicherry is the last place with real photos
+
 /* ── Main page ───────────────────────────────────────────────────── */
 export default function PlaceGallery() {
-  const { id }       = useParams();
-  const transitionTo = usePageTransition();
-  const data         = placeData[Number(id)];
+  const { id }          = useParams();
+  const transitionTo    = usePageTransition();
+  const data            = placeData[Number(id)];
+  const isUploadingSoon = Number(id) > UPLOADED_THROUGH;
 
   if (!data) {
     return (
@@ -358,16 +361,34 @@ export default function PlaceGallery() {
         </div>
       </section>
 
-      {/* ── Masonry gallery ── */}
-      <section className="pg-grid">
-        {data.items.map((item, i) =>
-          item.type === "quote" ? (
-            <QuoteBlock key={`q-${i}`} item={item} />
-          ) : (
-            <ImageTile key={`img-${i}`} item={item} color={data.color} />
-          )
-        )}
-      </section>
+      {/* ── Masonry gallery / Uploading Soon ── */}
+      {isUploadingSoon ? (
+        <section className="pg-uploading-soon" style={{ "--accent": data.color }}>
+          <div className="pg-us-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="12" width="40" height="28" rx="4" stroke="currentColor" strokeWidth="2.5"/>
+              <circle cx="24" cy="26" r="7" stroke="currentColor" strokeWidth="2.5"/>
+              <path d="M16 12l3-5h10l3 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M24 21v-6M21 18l3-3 3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <h2 className="pg-us-title">Uploading Soon</h2>
+          <p className="pg-us-sub">Photos from <span style={{ color: data.color }}>{data.place}</span> are on their way.</p>
+          <div className="pg-us-dots">
+            <span /><span /><span />
+          </div>
+        </section>
+      ) : (
+        <section className="pg-grid">
+          {data.items.map((item, i) =>
+            item.type === "quote" ? (
+              <QuoteBlock key={`q-${i}`} item={item} />
+            ) : (
+              <ImageTile key={`img-${i}`} item={item} color={data.color} />
+            )
+          )}
+        </section>
+      )}
 
       {/* ── Bottom CTA ── */}
       <motion.div

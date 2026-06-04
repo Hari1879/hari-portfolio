@@ -48,32 +48,71 @@ function PhotoCarousel() {
 }
 
 function About() {
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, margin: "-80px" });
+
+  const rise = (delay = 0) => ({
+    initial: { opacity: 0, y: 32 },
+    animate: inView ? { opacity: 1, y: 0 } : {},
+    transition: { duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] },
+  });
+
   return (
-    <section className="about" id="about">
+    <section className="about" id="about" ref={sectionRef}>
       <div className="about-container">
-        <h1 className="bg-text">HARI</h1>
-        <PhotoCarousel />
+
+        <motion.h1
+          className="bg-text"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 2, ease: "easeOut" }}
+        >
+          HARI
+        </motion.h1>
+
+        {/* Photo slides in from left */}
+        <motion.div
+          initial={{ opacity: 0, x: -70 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <PhotoCarousel />
+        </motion.div>
+
         <div className="about-content">
-          <h2>About Me</h2>
-          <p>
+
+          <motion.h2 {...rise(0.15)}>About Me</motion.h2>
+
+          <motion.p {...rise(0.28)}>
             Highly skilled and results-driven <span>Front-End Engineer</span> with <span>8 years</span> of experience in building responsive and scalable web applications.
             Expert in <span>Angular (2+)</span>, <span>React.js</span>, JavaScript, TypeScript, RxJS, NgRx, Redux, and REST APIs.
-          </p>
-          <p>
+          </motion.p>
+
+          <motion.p {...rise(0.4)}>
             Hands-on experience with <span>Node.js</span> backend and <span>iOS development</span> using Swift.
             Focused on clean code, performance, and delivering seamless user experiences across e-commerce, enterprise, and internal platforms.
-          </p>
-          <div className="about-stats">
+          </motion.p>
+
+          <motion.div className="about-stats" {...rise(0.54)}>
             <Stat value={8} label="Years Experience" />
             <Stat value={20} label="Projects Completed" />
             <Stat value={15} label="Technologies" />
-          </div>
-          <a
-            href="/Harimurugavel__Gnanavel-Frontend_developer.pdf"
-            download="Harimurugavel__Gnanavel-Frontend_developer.pdf"
+          </motion.div>
+
+          <motion.a
+            href="/Harimurugavel_Gnanavel_Resume_2026.pdf"
+            download="Harimurugavel_Gnanavel_Resume_2026.pdf"
             className="about-btn"
             id="download-resume-btn"
-          >Download Resume</a>
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.65, delay: 0.68, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Download Resume
+          </motion.a>
+
         </div>
       </div>
     </section>

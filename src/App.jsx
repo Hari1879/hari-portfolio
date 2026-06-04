@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import Home from './home'
 import './App.css'
 import { Toaster } from 'react-hot-toast'
@@ -10,25 +10,63 @@ import TravelDetail from './TravelDetail'
 import TravelGallery from './TravelGallery'
 import PlaceGallery from './PlaceGallery'
 import { PageTransitionProvider } from './PageTransition'
+import ScrollVideoHero from './ScrollVideoHero'
 
-function App() {
-  const [showIntro, setShowIntro] = useState(true)
+function InitialLoader({ onRevealBanner, onDone }) {
+  const [suffixOut, setSuffixOut] = useState(false);
+  const [exiting,   setExiting]   = useState(false);
+
+  // Lock scroll while loader is active
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
 
   useEffect(() => {
-    const introTimer = window.setTimeout(() => {
-      setShowIntro(false)
-    }, 2100)
+    const t1 = setTimeout(() => setSuffixOut(true), 1500);
+    // When exit starts, immediately show ScrollVideoHero BEHIND the fading loader
+    // so there is never a gap where the home page is exposed
+    const t2 = setTimeout(() => { setExiting(true); onRevealBanner(); }, 2500);
+    const t3 = setTimeout(onDone, 3350);
+    return () => [t1, t2, t3].forEach(clearTimeout);
+  }, [onRevealBanner, onDone]);
 
-    return () => window.clearTimeout(introTimer)
-  }, [])
+  const suffix = 'murugavel'.split('');
 
   return (
+    <div className={`il-overlay${exiting ? ' il-exit' : ''}`}>
+      <div className="il-sweep" />
+      <h1 className="il-name">
+        <span className="il-prefix">Hari</span>
+        {suffix.map((char, i) => (
+          <span
+            key={i}
+            className={`il-char${suffixOut ? ' il-char--out' : ''}`}
+            style={{ '--i': i }}
+          >
+            {char}
+          </span>
+        ))}
+      </h1>
+    </div>
+  );
+}
+
+function App() {
+  const [showLoader, setShowLoader] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
+
+  return (
+    <>
+      {showLoader && (
+        <InitialLoader
+          onRevealBanner={() => setShowBanner(true)}
+          onDone={() => setShowLoader(false)}
+        />
+      )}
+      {showBanner && <ScrollVideoHero onDone={() => setShowBanner(false)} />}
+
     <BrowserRouter>
-      {showIntro ? (
-        <div className="initial-loader" aria-label="Initial loading screen">
-          <h1 className="initial-loader-title">Hari</h1>
-        </div>
-      ) : null}
 
       <Toaster
         position="top-right"
@@ -86,7 +124,7 @@ function App() {
         </Routes>
       </PageTransitionProvider>
     </BrowserRouter>
-      
+    </>
   )
 
 }
