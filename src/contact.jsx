@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaInstagram, FaLinkedinIn, FaEnvelope, FaGithub } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
-import "./Contact.css";
+import "./contact.css";
 
 export default function Contact() {
   const sectionRef = useRef(null);

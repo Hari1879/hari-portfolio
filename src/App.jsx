@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Home from './home'
 import './App.css'
 import { Toaster } from 'react-hot-toast'
@@ -10,25 +10,16 @@ import TravelDetail from './TravelDetail'
 import TravelGallery from './TravelGallery'
 import PlaceGallery from './PlaceGallery'
 import { PageTransitionProvider } from './PageTransition'
+import ScrollVideoHero from './ScrollVideoHero'
 
 function App() {
-  const [showIntro, setShowIntro] = useState(true)
-
-  useEffect(() => {
-    const introTimer = window.setTimeout(() => {
-      setShowIntro(false)
-    }, 2100)
-
-    return () => window.clearTimeout(introTimer)
-  }, [])
+  const [showBanner, setShowBanner] = useState(true)
 
   return (
+    <>
+      {showBanner && <ScrollVideoHero onDone={() => setShowBanner(false)} />}
+
     <BrowserRouter>
-      {showIntro ? (
-        <div className="initial-loader" aria-label="Initial loading screen">
-          <h1 className="initial-loader-title">Hari</h1>
-        </div>
-      ) : null}
 
       <Toaster
         position="top-right"
@@ -86,7 +77,7 @@ function App() {
         </Routes>
       </PageTransitionProvider>
     </BrowserRouter>
-      
+    </>
   )
 
 }
