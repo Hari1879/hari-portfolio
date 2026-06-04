@@ -104,7 +104,7 @@ export default function SkillsSpin() {
   return (
     <>
       <section className="skills-section" id="skills">
-        <h2 className="skills-title">Skills &amp; Technologies</h2>
+        <h2 className="skills-title">My Works &amp; Projects</h2>
 
         {Object.entries(skills).map(([category, items]) => (
           <div className="category-section" key={category}>
