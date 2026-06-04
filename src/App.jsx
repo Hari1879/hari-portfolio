@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Home from './home'
 import './App.css'
 import { Toaster } from 'react-hot-toast'
@@ -12,11 +12,58 @@ import PlaceGallery from './PlaceGallery'
 import { PageTransitionProvider } from './PageTransition'
 import ScrollVideoHero from './ScrollVideoHero'
 
+function InitialLoader({ onRevealBanner, onDone }) {
+  const [suffixOut, setSuffixOut] = useState(false);
+  const [exiting,   setExiting]   = useState(false);
+
+  // Lock scroll while loader is active
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setSuffixOut(true), 1500);
+    // When exit starts, immediately show ScrollVideoHero BEHIND the fading loader
+    // so there is never a gap where the home page is exposed
+    const t2 = setTimeout(() => { setExiting(true); onRevealBanner(); }, 2500);
+    const t3 = setTimeout(onDone, 3350);
+    return () => [t1, t2, t3].forEach(clearTimeout);
+  }, [onRevealBanner, onDone]);
+
+  const suffix = 'murugavel'.split('');
+
+  return (
+    <div className={`il-overlay${exiting ? ' il-exit' : ''}`}>
+      <div className="il-sweep" />
+      <h1 className="il-name">
+        <span className="il-prefix">Hari</span>
+        {suffix.map((char, i) => (
+          <span
+            key={i}
+            className={`il-char${suffixOut ? ' il-char--out' : ''}`}
+            style={{ '--i': i }}
+          >
+            {char}
+          </span>
+        ))}
+      </h1>
+    </div>
+  );
+}
+
 function App() {
-  const [showBanner, setShowBanner] = useState(true)
+  const [showLoader, setShowLoader] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
 
   return (
     <>
+      {showLoader && (
+        <InitialLoader
+          onRevealBanner={() => setShowBanner(true)}
+          onDone={() => setShowLoader(false)}
+        />
+      )}
       {showBanner && <ScrollVideoHero onDone={() => setShowBanner(false)} />}
 
     <BrowserRouter>
