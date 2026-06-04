@@ -24,7 +24,7 @@ function HireMePrompt() {
         if (entry.isIntersecting && !firedRef.current) {
           firedRef.current = true;
           // Small delay so the user has a moment to see the section first
-          setTimeout(() => setVisible(true), 600);
+          setTimeout(() => { setVisible(true); setShowModal(true); }, 800);
           observer.disconnect();
         }
       },
