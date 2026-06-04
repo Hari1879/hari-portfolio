@@ -100,8 +100,8 @@ function About() {
           </motion.div>
 
           <motion.a
-            href="/Harimurugavel__Gnanavel-Frontend_developer.pdf"
-            download="Harimurugavel__Gnanavel-Frontend_developer.pdf"
+            href="/Harimurugavel_Gnanavel_Resume_2026.pdf"
+            download="Harimurugavel_Gnanavel_Resume_2026.pdf"
             className="about-btn"
             id="download-resume-btn"
             initial={{ opacity: 0, y: 20 }}

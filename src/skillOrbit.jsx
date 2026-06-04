@@ -25,7 +25,7 @@ const PROJECTS = [
     subtitle: "React · Node.js · MySQL",
     imageUrl: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80&auto=format&fit=crop",
     actionText: "View Project",
-    href: "https://www.attendra.in",
+    href: "https://ateendra.in/",
     accent: "#4285f4",
   },
 ];

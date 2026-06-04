@@ -70,8 +70,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.35s ease;
   z-index: 2;
+  /* No CSS transition — opacity is driven frame-by-frame in JS */
 }
 
 .svh-video-2 {
@@ -182,40 +182,51 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   z-index: 10;
   pointer-events: none;
   transition: opacity 0.5s ease;
+  animation: svh-hint-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes svh-hint-pulse {
+  0%, 100% { filter: drop-shadow(0 0  6px rgba(255, 0, 79, 0.45)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(255, 0, 79, 0.85)); }
 }
 
 .svh-hint span {
-  font-size: 10px;
-  letter-spacing: 0.22em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 0 12px rgba(255, 0, 79, 0.7);
 }
 
 .svh-hint-mouse {
-  width: 22px;
-  height: 36px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
   border-radius: 20px;
   display: flex;
   justify-content: center;
-  padding-top: 6px;
+  padding-top: 7px;
+  box-shadow:
+    0 0 10px rgba(255, 0, 79, 0.5),
+    inset 0 0 6px rgba(255, 255, 255, 0.08);
 }
 
 .svh-hint-wheel {
-  width: 2px;
-  height: 7px;
-  background: rgba(255, 255, 255, 0.6);
+  width: 3px;
+  height: 8px;
+  background: linear-gradient(to bottom, #fff, #ff4f8b);
   border-radius: 2px;
   animation: svh-wheel 1.6s ease-in-out infinite;
 }
 
 @keyframes svh-wheel {
-  0%, 100% { opacity: 1; transform: translateY(0); }
-  50%       { opacity: 0.3; transform: translateY(8px); }
+  0%, 100% { opacity: 1;   transform: translateY(0);   }
+  50%       { opacity: 0.3; transform: translateY(10px); }
 }
 
 /* ── Progress bar ── */

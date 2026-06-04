@@ -507,7 +507,7 @@ export default function TravelDetail() {
       </motion.div>
 
       {/* ══ MASONRY GALLERY ═════════════════════════════════════ */}
-      {gallery && (
+      {gallery?.items?.length > 0 ? (
         <section className="pg-grid">
           {gallery.items.map((item, i) =>
             item.type === "quote" ? (
@@ -517,6 +517,18 @@ export default function TravelDetail() {
             )
           )}
         </section>
+      ) : (
+        <motion.div
+          className="td-gallery-empty"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <span className="td-gallery-empty-icon">📷</span>
+          <p className="td-gallery-empty-title">Stay tuned</p>
+          <p className="td-gallery-empty-sub">Uploading soon…</p>
+        </motion.div>
       )}
 
       {/* ══ PREV / NEXT NAV ═════════════════════════════════════ */}
