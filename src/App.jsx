@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Home from './home'
 import './App.css'
 import { Toaster } from 'react-hot-toast'
@@ -56,15 +56,30 @@ function App() {
   const [showLoader, setShowLoader] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
 
+  const handleRevealBanner = useCallback(() => setShowBanner(true), []);
+  const handleLoaderDone   = useCallback(() => setShowLoader(false), []);
+  const handleBannerDone   = useCallback(() => setShowBanner(false), []);
+
+  // Block right-click "Save Image As" on every image and video across the app
+  useEffect(() => {
+    const block = (e) => {
+      if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener('contextmenu', block);
+    return () => document.removeEventListener('contextmenu', block);
+  }, []);
+
   return (
     <>
       {showLoader && (
         <InitialLoader
-          onRevealBanner={() => setShowBanner(true)}
-          onDone={() => setShowLoader(false)}
+          onRevealBanner={handleRevealBanner}
+          onDone={handleLoaderDone}
         />
       )}
-      {showBanner && <ScrollVideoHero onDone={() => setShowBanner(false)} />}
+      {showBanner && <ScrollVideoHero onDone={handleBannerDone} />}
 
     <BrowserRouter>
 

@@ -33,14 +33,14 @@
   z-index: 1;
 }
 
-/* ── Left panel ──────────────────────────────────────────────────────── */
+/* ── Left panel ── */
 .tp-left {
-  width: 320px;
+  width: 20rem;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 100px 40px 60px;
+  padding: 6.25rem 2.5rem 3.75rem;
   border-right: 1px solid rgba(255, 255, 255, 0.07);
   z-index: 2;
   gap: 0;
@@ -50,13 +50,13 @@
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
-  padding: 7px 14px;
+  padding: 0.4375rem 0.875rem;
   border-radius: 20px;
   cursor: pointer;
   width: fit-content;
-  margin-bottom: 36px;
+  margin-bottom: 2.25rem;
   transition: border-color 0.2s, color 0.2s;
 }
 .tp-back:hover {
@@ -68,19 +68,19 @@
 .tp-gallery-link {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 0.4375rem;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.22);
   color: rgba(255,255,255,0.55);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 600;
-  padding: 7px 14px 7px 12px;
+  padding: 0.4375rem 0.875rem 0.4375rem 0.75rem;
   border-radius: 20px;
   cursor: pointer;
   width: fit-content;
-  margin-bottom: 28px;
+  margin-bottom: 1.75rem;
   transition: color 0.25s, border-color 0.25s, background 0.25s;
 }
 .tp-gallery-link:hover {
@@ -90,12 +90,12 @@
 }
 
 .tp-sub {
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
 }
 
 .tp-heading {
@@ -104,28 +104,28 @@
   color: #fff;
   line-height: 1.05;
   letter-spacing: -0.03em;
-  margin-bottom: 36px;
+  margin-bottom: 2.25rem;
 }
 
 .tp-counter {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
-.tp-count-active { color: #ff6b35; font-size: 18px; }
+.tp-count-active { color: #ff6b35; font-size: 1.125rem; }
 .tp-count-sep    { color: rgba(255,255,255,0.25); margin: 0 4px; }
 .tp-count-total  { color: rgba(255,255,255,0.4); }
 
 .tp-nav {
   display: flex;
-  gap: 10px;
-  margin-bottom: 28px;
+  gap: 0.625rem;
+  margin-bottom: 1.75rem;
 }
 
 .tp-btn {
-  width: 44px;
-  height: 44px;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.05);
@@ -170,7 +170,7 @@
 
 .tp-dots {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
 }
 .tp-dot {
   width: 8px;
@@ -186,22 +186,22 @@
   transform: scale(1.4);
 }
 
-/* ── Right panel ─────────────────────────────────────────────────────── */
+/* ── Right panel ── */
 .tp-right {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 60px 60px;
+  padding: 6.25rem 3.75rem 3.75rem;
   position: relative;
   z-index: 2;
 }
 
-/* ── Card ────────────────────────────────────────────────────────────── */
+/* ── Card ── */
 .tp-card {
   position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: 37.5rem;
   border-radius: 20px;
   overflow: hidden;
   border-top: 2px solid var(--card-color, #ff6b35);
@@ -214,7 +214,7 @@
 .tp-card-img-wrap {
   position: relative;
   width: 100%;
-  height: 320px;
+  height: 20rem;
   overflow: hidden;
 }
 .tp-card-img {
@@ -233,17 +233,17 @@
 }
 
 .tp-card-info {
-  padding: 24px 28px 28px;
+  padding: 1.5rem 1.75rem 1.75rem;
 }
 
 .tp-card-tag {
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--card-color, #ff6b35);
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .tp-card-place {
@@ -255,33 +255,33 @@
 }
 
 .tp-card-country {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: rgba(255, 255, 255, 0.4);
   font-weight: 500;
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 0.875rem;
 }
 
 .tp-card-desc {
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: rgba(255, 255, 255, 0.6);
   line-height: 1.75;
   max-width: 46ch;
-  margin-bottom: 18px;
+  margin-bottom: 1.125rem;
 }
 
 .tp-card-view {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 0.4375rem;
   background: none;
   border: 1px solid var(--card-color, #ff6b35);
   color: var(--card-color, #ff6b35);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 8px 18px;
+  padding: 0.5rem 1.125rem;
   border-radius: 20px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
@@ -293,9 +293,9 @@
 
 .tp-card-number {
   position: absolute;
-  top: 20px;
-  right: 24px;
-  font-size: 80px;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-size: 5rem;
   font-weight: 900;
   color: rgba(255, 255, 255, 0.05);
   line-height: 1;
@@ -305,46 +305,44 @@
 
 .tp-card-glow {
   position: absolute;
-  bottom: -40px;
-  right: -30px;
-  width: 220px;
-  height: 220px;
+  bottom: -2.5rem;
+  right: -1.875rem;
+  width: 13.75rem;
+  height: 13.75rem;
   border-radius: 50%;
   opacity: 0.12;
   filter: blur(55px);
   pointer-events: none;
 }
 
-/* ── Peek label ──────────────────────────────────────────────────────── */
+/* ── Peek label ── */
 .tp-peek {
   position: absolute;
-  right: 20px;
-  bottom: 40px;
+  right: 1.25rem;
+  bottom: 2.5rem;
   opacity: 0.35;
 }
 .tp-peek-title {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #fff;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────── */
-
-/* ── India Map slide ─────────────────────────────────────────────────── */
+/* ── India Map slide ── */
 .tp-map-view {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
 .tp-map-wrap {
   position: relative;
-  width: min(480px, 92%);
+  width: min(30rem, 92%);
   aspect-ratio: 500 / 600;
   flex-shrink: 0;
   margin: 0 auto;
@@ -389,8 +387,8 @@
 
 .tp-map-dot {
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 0.875rem;
+  height: 0.875rem;
   border-radius: 50%;
   box-shadow: 0 0 10px currentColor;
   position: relative;
@@ -404,8 +402,8 @@
 
 .tp-map-pulse {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   border-radius: 50%;
   border: 1.5px solid;
   opacity: 0.5;
@@ -425,11 +423,11 @@
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: #fff;
-  padding: 4px 10px;
+  padding: 0.25rem 0.625rem;
   border-radius: 20px;
   pointer-events: none;
   z-index: 20;
@@ -440,10 +438,10 @@
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #fff;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  padding: 12px 28px;
+  padding: 0.75rem 1.75rem;
   border-radius: 30px;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
@@ -455,8 +453,8 @@
 }
 
 .tp-dot--map {
-  width: 14px;
-  height: 14px;
+  width: 0.875rem;
+  height: 0.875rem;
   border-radius: 2px;
 }
 
@@ -466,14 +464,20 @@
     width: 100%;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    padding: 90px 24px 32px;
+    padding: 5.625rem 1.5rem 2rem;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 1rem;
     align-items: flex-end;
   }
   .tp-back { margin-bottom: 0; width: 100%; }
   .tp-heading { font-size: 2rem; margin-bottom: 0; }
-  .tp-right { padding: 32px 20px 60px; }
-  .tp-card-img-wrap { height: 220px; }
+  .tp-right { padding: 2rem 1.25rem 3.75rem; }
+  .tp-card-img-wrap { height: 13.75rem; }
+}
+
+@media (max-width: 480px) {
+  .tp-left { padding: 4.5rem 1rem 1.5rem; }
+  .tp-right { padding: 1.5rem 0.875rem 3rem; }
+  .tp-card-info { padding: 1.25rem 1.25rem 1.5rem; }
 }

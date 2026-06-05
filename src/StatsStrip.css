@@ -1,0 +1,143 @@
+/* ── Stats Strip ── */
+.stats-section {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(255,0,79,0.05) 0%, transparent 70%),
+    #090909;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Top & bottom gradient rule lines */
+.stats-rule {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,0,79,0.45) 25%,
+    rgba(255,79,139,0.45) 75%,
+    transparent 100%);
+  z-index: 1;
+}
+.stats-rule--top    { top: 0; }
+.stats-rule--bottom { bottom: 0; }
+
+.stats-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 3.75rem 3.75rem;
+}
+
+.stats-eyebrow {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #ff004f;
+  margin: 0 0 2.5rem;
+}
+
+/* 6-column grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* ── Each stat item ── */
+.ss-item {
+  position: relative;
+  text-align: center;
+  padding: 2rem 1rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  transform-style: preserve-3d;
+}
+.ss-item:last-child { border-right: none; }
+
+/* 3D lift on hover */
+.ss-item:hover {
+  transform: perspective(500px) translateZ(14px) scale(1.04);
+}
+
+/* Pseudo depth slab — visible only when hovering (gives 3D thickness) */
+.ss-depth {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,0,79,0.08), transparent 70%);
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.ss-item:hover .ss-depth { opacity: 1; }
+
+/* Number */
+.ss-number {
+  display: block;
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(135deg, #fff 0%, #ffb3cc 45%, #ff004f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.625rem;
+  /* glow grows on parent hover */
+  transition: filter 0.35s ease;
+}
+.ss-item:hover .ss-number {
+  filter: drop-shadow(0 0 14px rgba(255,0,79,0.5));
+}
+
+.ss-prefix,
+.ss-suffix {
+  font-size: 0.55em;
+  vertical-align: super;
+  line-height: 1;
+}
+
+.ss-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.82);
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+
+.ss-desc {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.32);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .ss-item:nth-child(3n) { border-right: none; }
+}
+
+@media (max-width: 640px) {
+  .stats-inner { padding: 2.5rem 1.25rem; }
+  .stats-grid  { grid-template-columns: repeat(2, 1fr); }
+  /* Reset 3-col rule, apply 2-col rule */
+  .ss-item:nth-child(3n) { border-right: 1px solid rgba(255,255,255,0.06); }
+  .ss-item:nth-child(2n) { border-right: none; }
+  /* Row dividers between 2-col rows */
+  .ss-item { border-bottom: 1px solid rgba(255,255,255,0.04); padding: 1.5rem 0.75rem; }
+  .ss-item:nth-last-child(-n+2) { border-bottom: none; }
+  /* Disable 3D on touch */
+  .ss-item:hover { transform: none; }
+}
+
+@media (max-width: 380px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .ss-item { border-right: none; }
+  .ss-item:nth-child(3n),
+  .ss-item:nth-child(2n) { border-right: none; }
+}

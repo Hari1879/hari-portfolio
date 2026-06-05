@@ -1,0 +1,506 @@
+/* ══════════════════════════════════
+   Experience Section
+══════════════════════════════════ */
+.experience-section {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 10% 20%, rgba(59,130,246,0.07)  0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(255,79,139,0.07)  0%, transparent 50%),
+    #0d0d10;
+  color: #fff;
+  padding: 7.5rem 3.75rem;
+  overflow: hidden;
+}
+
+/* ── Ambient orbs ── */
+.exp-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+  z-index: 0;
+}
+.exp-bg-orb--1 {
+  width: 34rem; height: 34rem;
+  background: radial-gradient(circle, rgba(59,130,246,0.11) 0%, transparent 65%);
+  top: -10rem; left: -8rem;
+  animation: expOrb 20s ease-in-out infinite alternate;
+}
+.exp-bg-orb--2 {
+  width: 28rem; height: 28rem;
+  background: radial-gradient(circle, rgba(255,79,139,0.10) 0%, transparent 65%);
+  bottom: -8rem; right: -6rem;
+  animation: expOrb 24s ease-in-out infinite alternate-reverse;
+}
+@keyframes expOrb {
+  from { transform: translate(0,0) scale(1);    }
+  to   { transform: translate(45px,35px) scale(1.22); }
+}
+
+/* ── Container ── */
+.exp-container {
+  position: relative;
+  z-index: 1;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+/* ── Heading ── */
+.exp-heading { text-align: center; margin-bottom: 4.5rem; }
+
+.exp-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #ff004f;
+  margin: 0 0 1rem;
+}
+.exp-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.875rem;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.62) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.exp-sub {
+  font-size: 0.9375rem;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+}
+
+/* ══════════════════════════════════
+   Timeline layout
+══════════════════════════════════ */
+.exp-timeline {
+  position: relative;
+  padding: 0.5rem 0 2rem;
+}
+
+/* Centre vertical track */
+.exp-line-track {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.exp-line-fill {
+  width: 100%;
+  background: linear-gradient(to bottom, #ff004f, #ff4f8b, #a855f7);
+  box-shadow: 0 0 12px rgba(255,0,79,0.6);
+}
+
+/* ── Item wrapper ── */
+.exp-item {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-bottom: 4rem;
+  align-items: flex-start;
+}
+.exp-item--left  { justify-content: flex-start; padding-right: calc(50% + 2.75rem); }
+.exp-item--right { justify-content: flex-end;   padding-left:  calc(50% + 2.75rem); }
+
+/* ══════════════════════════════════
+   Card
+══════════════════════════════════ */
+.exp-card {
+  position: relative;
+  width: 100%;
+  background: rgba(255,255,255,0.028);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 22px;
+  padding: 1.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+  will-change: transform;
+}
+
+/* Light shimmer sweep on hover */
+.exp-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.038), transparent);
+  transform: skewX(-22deg);
+  transition: left 0.7s cubic-bezier(0.22,1,0.36,1);
+  pointer-events: none;
+  z-index: 4;
+}
+.exp-card:hover::after { left: 140%; }
+
+/* Cursor glow follows mouse */
+.exp-cursor-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  pointer-events: none;
+  transition: background 0.07s ease;
+  z-index: 0;
+}
+
+/* Top colour accent bar */
+.exp-accent-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--exp-color) 0%, transparent 80%);
+  border-radius: 22px 22px 0 0;
+  z-index: 2;
+}
+
+/* ── Giant year watermark ── */
+.exp-year-bg {
+  position: absolute;
+  bottom: -1rem;
+  right: -0.5rem;
+  font-size: clamp(6rem, 14vw, 10rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.045);
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Floating level badge ── */
+.exp-level-pill {
+  position: absolute;
+  top: 1.375rem;
+  right: 1.5rem;
+  padding: 0.28rem 0.875rem;
+  background: var(--exp-color);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  box-shadow:
+    0 4px 18px var(--exp-dim),
+    0 0 10px var(--exp-color),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+  z-index: 5;
+  animation: pillFloat 3.2s ease-in-out infinite;
+}
+@keyframes pillFloat {
+  0%,100% { transform: translateY(0);     box-shadow: 0 4px 18px var(--exp-dim), 0 0 10px var(--exp-color); }
+  50%      { transform: translateY(-5px); box-shadow: 0 9px 26px var(--exp-dim), 0 0 16px var(--exp-color); }
+}
+
+/* All card children above watermark & glow */
+.exp-header,
+.exp-chips-row,
+.exp-bullets,
+.exp-metrics { position: relative; z-index: 2; }
+
+/* ── Header ── */
+.exp-header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-right: 4rem; /* clearance for the floating pill */
+}
+
+.exp-logo-box {
+  width: 3.25rem; height: 3.25rem;
+  border-radius: 14px;
+  background: var(--exp-dim);
+  border: 1px solid var(--exp-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.625rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--exp-color);
+  box-shadow: 0 0 16px var(--exp-dim);
+}
+
+.exp-header-info { flex: 1; min-width: 0; }
+
+.exp-company {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.exp-role {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.52);
+  margin: 0 0 0.375rem;
+  line-height: 1.35;
+}
+.exp-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+}
+.exp-period   { color: rgba(255,255,255,0.72); font-weight: 600; }
+.exp-dur,
+.exp-loc      { color: rgba(255,255,255,0.38); }
+.exp-sep      { color: rgba(255,255,255,0.18); }
+
+/* ── Project chips ── */
+.exp-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.exp-chip {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.32rem 0.875rem;
+  background: var(--exp-dim);
+  border: 1px solid var(--exp-border);
+  border-radius: 8px;
+  color: var(--exp-color);
+  letter-spacing: 0.03em;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.exp-chip:hover {
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-2px);
+}
+
+/* ── Highlight bullets ── */
+.exp-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.exp-bullets li {
+  font-size: 0.9375rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  padding-left: 1.1rem;
+  position: relative;
+}
+.exp-bullets li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--exp-color);
+  font-size: 0.6rem;
+  top: 0.28em;
+}
+
+/* ── Bottom metrics strip ── */
+.exp-metrics {
+  display: flex;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+}
+.exp-metric {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.25s ease;
+  border-radius: 8px;
+}
+.exp-metric:last-child { border-right: none; }
+.exp-metric:hover      { background: rgba(255,255,255,0.04); }
+
+.exp-metric-val {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--exp-color);
+  margin-bottom: 0.2rem;
+  text-shadow: 0 0 18px var(--exp-dim);
+  transition: text-shadow 0.3s ease;
+}
+.exp-metric:hover .exp-metric-val {
+  text-shadow: 0 0 28px var(--exp-color), 0 0 10px var(--exp-color);
+}
+.exp-metric-lbl {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.03em;
+}
+
+/* ══════════════════════════════════
+   Timeline dot
+══════════════════════════════════ */
+.exp-dot-anchor {
+  position: absolute;
+  left: 50%;
+  top: 1.875rem;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.exp-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2.5px solid #0d0d10;
+  position: relative;
+  z-index: 3;
+}
+.exp-dot-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  animation: dotRing 2.4s ease-in-out infinite;
+}
+.exp-dot-ring          { width: 30px; height: 30px; opacity: 0.38; animation-delay: 0s;    }
+.exp-dot-ring--outer   { width: 46px; height: 46px; opacity: 0.16; animation-delay: 0.4s;  }
+
+@keyframes dotRing {
+  0%,100% { transform: scale(1);    opacity: inherit; }
+  50%      { transform: scale(1.3); opacity: 0.06;    }
+}
+
+/* ══════════════════════════════════
+   Responsive
+══════════════════════════════════ */
+
+/* ── Tablet: collapse to single-column timeline ── */
+@media (max-width: 860px) {
+  .experience-section { padding: 5rem 1.5rem; }
+
+  .exp-line-track {
+    left: 1.25rem;
+    transform: none;
+  }
+  .exp-item--left,
+  .exp-item--right {
+    padding-left:  3.75rem;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+  .exp-dot-anchor {
+    left: 1.25rem;
+    transform: translateX(-50%);
+  }
+
+  /* Disable 3D on touch */
+  .exp-card { transform: none !important; box-shadow: none !important; }
+
+  /* Scale down text for tablet */
+  .exp-company      { font-size: 1.25rem; }
+  .exp-role         { font-size: 0.9375rem; }
+  .exp-meta-row     { font-size: 0.8125rem; }
+  .exp-bullets li   { font-size: 0.875rem; }
+  .exp-metric-val   { font-size: 1.5rem; }
+}
+
+/* ── Small tablet / large phone ── */
+@media (max-width: 640px) {
+  .experience-section { padding: 4.5rem 1.25rem; }
+
+  .exp-line-track { left: 1.125rem; }
+  .exp-item--left,
+  .exp-item--right { padding-left: 3.25rem; }
+  .exp-dot-anchor  { left: 1.125rem; }
+
+  .exp-card { padding: 1.375rem; gap: 1rem; }
+
+  /* Header: tighten clearance for level pill */
+  .exp-header { padding-right: 3.5rem; }
+
+  .exp-company      { font-size: 1.125rem; }
+  .exp-role         { font-size: 0.875rem; }
+  .exp-meta-row     { font-size: 0.75rem; }
+  .exp-chip         { font-size: 0.75rem; padding: 0.25rem 0.625rem; }
+  .exp-bullets li   { font-size: 0.8125rem; line-height: 1.6; }
+  .exp-metric-val   { font-size: 1.375rem; }
+  .exp-metric-lbl   { font-size: 0.75rem; }
+  .exp-year-bg      { font-size: 5rem; }
+  .exp-level-pill   { font-size: 0.6875rem; padding: 0.22rem 0.7rem; }
+}
+
+/* ── Phone ── */
+@media (max-width: 480px) {
+  .experience-section { padding: 4rem 1rem; }
+
+  .exp-line-track { left: 1rem; }
+  .exp-item--left,
+  .exp-item--right { padding-left: 3rem; }
+  .exp-dot-anchor  { left: 1rem; }
+
+  .exp-card { padding: 1.125rem; gap: 0.875rem; }
+  .exp-header { gap: 0.75rem; padding-right: 3.25rem; }
+
+  /* Logo box slightly smaller */
+  .exp-logo-box { width: 2.75rem; height: 2.75rem; border-radius: 10px; }
+
+  .exp-company      { font-size: 1.0625rem; }
+  .exp-role         { font-size: 0.8125rem; }
+  .exp-meta-row     { font-size: 0.6875rem; gap: 0.25rem; }
+  .exp-chip         { font-size: 0.6875rem; padding: 0.2rem 0.5rem; }
+  .exp-bullets      { gap: 0.4rem; }
+  .exp-bullets li   { font-size: 0.75rem; line-height: 1.55; padding-left: 0.9rem; }
+  .exp-metric-val   { font-size: 1.25rem; }
+  .exp-metric-lbl   { font-size: 0.6875rem; }
+  .exp-year-bg      { font-size: 4rem; }
+  .exp-level-pill   { font-size: 0.625rem; top: 1rem; right: 1rem; }
+  .exp-metrics      { padding-top: 0.75rem; }
+  .exp-metric       { padding: 0.4rem 0.25rem; }
+}
+
+/* ── Small phone ── */
+@media (max-width: 380px) {
+  .experience-section { padding: 3.5rem 0.75rem; }
+
+  .exp-line-track { left: 0.875rem; }
+  .exp-item--left,
+  .exp-item--right { padding-left: 2.5rem; }
+  .exp-dot-anchor  { left: 0.875rem; }
+
+  .exp-card { padding: 1rem; border-radius: 16px; }
+
+  /* Stack logo + header vertically on very small screens */
+  .exp-header { flex-direction: column; gap: 0.625rem; padding-right: 0; }
+  .exp-logo-box { width: 2.5rem; height: 2.5rem; }
+
+  /* Move level pill below the stacked header */
+  .exp-level-pill {
+    position: static;
+    display: inline-block;
+    animation: none;
+    margin-bottom: 0.25rem;
+    font-size: 0.625rem;
+  }
+
+  .exp-company    { font-size: 1rem; }
+  .exp-role       { font-size: 0.75rem; }
+  .exp-meta-row   { font-size: 0.625rem; }
+  .exp-year-bg    { font-size: 3.25rem; }
+  .exp-metric-val { font-size: 1.125rem; }
+  .exp-metric-lbl { font-size: 0.625rem; }
+
+  /* Dot rings too large on tiny screens */
+  .exp-dot-ring          { width: 22px; height: 22px; }
+  .exp-dot-ring--outer   { width: 34px; height: 34px; }
+}

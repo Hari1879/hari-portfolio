@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Header from "./header";
 import About, { AICertifications } from "./about";
+import StatsStrip from "./StatsStrip";
+import Experience from "./Experience";
+import Projects from "./Projects";
 import Skills from "./skills";
 import Contact from "./contact";
 import FogEffect from "./FogEffect";
@@ -75,6 +78,9 @@ function Home() {
       <FogEffect />
       <Header />
       <About />
+      <StatsStrip />
+      <Experience />
+      <Projects />
       <AICertifications />
       <Skills />
       <SkillOrbit />

@@ -1,6 +1,6 @@
-﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   Hobbies  â€“  Carousel Layout (patrickheng-inspired)
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══════════════════════════════════════════════════════════════
+   Hobbies  —  Carousel Layout (patrickheng-inspired)
+══════════════════════════════════════════════════════════════ */
 
 .hobbies-carousel-section {
   display: flex;
@@ -17,26 +17,26 @@
   cursor: grabbing;
 }
 
-/* â”€â”€ Left panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Left panel ── */
 .hc-left {
-  width: 320px;
+  width: 20rem;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 48px 80px 60px;
+  padding: 5rem 3rem 5rem 3.75rem;
   border-right: 1px solid rgba(255, 255, 255, 0.07);
   position: relative;
   z-index: 2;
 }
 
 .hc-sub {
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #ff004f;
-  margin: 0 0 20px;
+  margin: 0 0 1.25rem;
 }
 
 .hc-heading {
@@ -44,37 +44,37 @@
   font-weight: 800;
   line-height: 1.0;
   letter-spacing: -0.03em;
-  margin: 0 0 48px;
+  margin: 0 0 3rem;
   color: #fff;
 }
 
 .hc-counter {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-family: 'Courier New', monospace;
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.35);
-  margin-bottom: 28px;
+  margin-bottom: 1.75rem;
 }
 .hc-count-active {
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 700;
   color: #fff;
 }
 
 .hc-nav {
   display: flex;
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
 }
 
 .hc-btn {
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -94,7 +94,7 @@
 
 .hc-dots {
   display: flex;
-  gap: 10px;
+  gap: 0.625rem;
   align-items: center;
 }
 .hc-dot {
@@ -112,28 +112,28 @@
   border-radius: 4px;
 }
 
-/* â”€â”€ Right carousel area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Right carousel area ── */
 .hc-right {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px;
+  padding: 3.75rem;
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
 
-/* â”€â”€ Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Card ── */
 .hc-card {
   width: 100%;
-  max-width: 580px;
-  min-height: 420px;
+  max-width: 36.25rem;
+  min-height: 26.25rem;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-top: 2px solid var(--card-color, #ff004f);
   border-radius: 28px;
-  padding: 52px 52px 48px;
+  padding: 3.25rem 3.25rem 3rem;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -146,7 +146,7 @@
 .hc-card-number {
   position: absolute;
   top: -10px;
-  right: 36px;
+  right: 2.25rem;
   font-size: clamp(7rem, 14vw, 11rem);
   font-weight: 900;
   letter-spacing: -0.06em;
@@ -160,7 +160,7 @@
 .hc-card-inner {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 2rem;
   position: relative;
   z-index: 1;
   flex: 1;
@@ -170,125 +170,10 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
-/* ── Full-section falling items background ──────────────────────────── */
-.hb-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.hb-ball {
-  position: absolute;
-  top: calc(-1 * var(--size, 60px));
-  left: calc(var(--left, 50%) - var(--size, 60px) / 2);
-  width: var(--size, 60px);
-  height: var(--size, 60px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  user-select: none;
-  filter: drop-shadow(0 0 8px var(--color, #ff004f));
-  animation: ballDropFull var(--dur, 2s) infinite var(--delay, 0s);
-  transform-origin: 50% 100%;
-}
-
-.hb-shadow {
-  position: absolute;
-  bottom: 20px;
-  left: calc(var(--left, 50%) - var(--size, 60px) * 0.45);
-  width: calc(var(--size, 60px) * 0.9);
-  height: calc(var(--size, 60px) * 0.14);
-  border-radius: 50%;
-  background: var(--color, #ff004f);
-  animation: shadowFullPulse var(--dur, 2s) infinite var(--delay, 0s);
-  filter: blur(4px);
-}
-
-.hc-card-tag {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--card-color, #ff004f);
-}
-
-.hc-card-title {
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-  font-weight: 800;
-  margin: 0;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
-  color: #fff;
-}
-
-.hc-card-desc {
-  margin: 8px 0 0;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.75;
-  max-width: 42ch;
-}
-
-.hc-explore-btn {
-  margin-top: 20px;
-  padding: 10px 22px;
-  border: none;
-  border-radius: 24px;
-  background: #ff6b35;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-}
-.hc-explore-btn:hover {
-  background: #e85c28;
-  transform: translateY(-2px);
-}
-.hc-explore-btn:active { transform: translateY(0); }
-
-.hc-card-glow {
-  position: absolute;
-  bottom: -60px;
-  right: -60px;
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  opacity: 0.10;
-  filter: blur(60px);
-  pointer-events: none;
-}
-
-/* peek next card */
-.hc-peek {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  opacity: 0.28;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  pointer-events: none;
-}
-.hc-peek span:first-child {
-  font-size: 26px;
-}
-
-
-/* Full-section Ball Drop Physics ------------------------------------ */
-
+/* ── Full-section falling items background ── */
 .hb-bg {
   position: absolute;
   inset: 0;
@@ -325,6 +210,86 @@
   filter: blur(4px);
 }
 
+.hc-card-tag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--card-color, #ff004f);
+}
+
+.hc-card-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: #fff;
+}
+
+.hc-card-desc {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.75;
+  max-width: 42ch;
+}
+
+.hc-explore-btn {
+  margin-top: 1.25rem;
+  padding: 0.625rem 1.375rem;
+  border: none;
+  border-radius: 24px;
+  background: #ff6b35;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  width: fit-content;
+}
+.hc-explore-btn:hover {
+  background: #e85c28;
+  transform: translateY(-2px);
+}
+.hc-explore-btn:active { transform: translateY(0); }
+
+.hc-card-glow {
+  position: absolute;
+  bottom: -3.75rem;
+  right: -3.75rem;
+  width: 13.75rem;
+  height: 13.75rem;
+  border-radius: 50%;
+  opacity: 0.10;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* peek next card */
+.hc-peek {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.28;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.hc-peek span:first-child {
+  font-size: 1.625rem;
+}
+
+/* Full-section Ball Drop Physics */
+
 @keyframes ballDropFull {
   0% {
     transform: translateY(0) rotate(0deg) scaleX(1) scaleY(1);
@@ -359,7 +324,8 @@
   83%       { opacity: 0.05; transform: scaleX(0.5);  }
   90%, 100% { opacity: 0.16; transform: scaleX(0.7);  }
 }
-/* â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+/* ── Responsive ── */
 @media (max-width: 860px) {
   .hobbies-carousel-section {
     flex-direction: column;
@@ -369,10 +335,10 @@
     width: 100%;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    padding: 80px 28px 40px;
+    padding: 5rem 1.75rem 2.5rem;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 1.25rem;
     align-items: flex-end;
   }
   .hc-heading {
@@ -382,21 +348,28 @@
   .hc-sub,
   .hc-counter { margin-bottom: 0; }
   .hc-right {
-    padding: 40px 24px 60px;
+    padding: 2.5rem 1.5rem 3.75rem;
     align-items: flex-start;
   }
   .hc-card {
-    min-height: 360px;
-    padding: 36px 32px;
+    min-height: 22.5rem;
+    padding: 2.25rem 2rem;
   }
   .hc-card-inner {
     flex-direction: column;
-    gap: 24px;
+    gap: 1.5rem;
   }
   .hc-card-visual {
     width: 100%;
-    height: 110px;
+    height: 6.875rem;
   }
   .hc-card-title { font-size: 2rem; }
   .hc-peek { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hc-left { padding: 4.5rem 1.25rem 2rem; }
+  .hc-right { padding: 2rem 1rem 3rem; }
+  .hc-card { padding: 1.75rem 1.25rem 1.5rem; }
+  .hc-card-desc { font-size: 0.9375rem; }
 }

@@ -93,6 +93,9 @@ export default function Contact() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 900;
+  const slideOffset = isMobile ? 0 : 120;
+
   return (
     <section className="contact-section" ref={sectionRef} id="contact">
 
@@ -101,8 +104,8 @@ export default function Contact() {
       <div
         className="contact-content"
         style={{
-          transform: `translateY(${80 - progress * 80}px)`,
-          opacity: progress
+          transform: `translateY(${(1 - progress) * 50}px)`,
+          opacity: Math.min(1, progress * 1.5)
         }}
       >
         <h1 className="cinematic-title">
@@ -117,7 +120,7 @@ export default function Contact() {
           <div
             className="panel left"
             style={{
-              transform: `translateX(${ -120 + progress * 120 }px)`
+              transform: `translateX(${ -slideOffset + progress * slideOffset }px)`
             }}
           >
             <h3 className="panel-title">Contact</h3>
@@ -145,7 +148,7 @@ export default function Contact() {
           <div
             className="panel right"
             style={{
-              transform: `translateX(${ 120 - progress * 120 }px)`
+              transform: `translateX(${ slideOffset - progress * slideOffset }px)`
             }}
           >
             <h3 className="panel-title">Message</h3>
