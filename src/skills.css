@@ -1,24 +1,24 @@
 .skills-section {
   min-height: 100vh;
-  padding: 120px 60px;
+  padding: 7.5rem 3.75rem;
   background: linear-gradient(135deg, #0f0f0f, #161616);
   color: #fff;
 }
 
 .skills-title {
   text-align: center;
-  font-size: 40px;
-  margin-bottom: 90px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 5.625rem;
   font-weight: 600;
 }
 
 .category-section {
-  margin-bottom: 80px;
+  margin-bottom: 5rem;
 }
 
 .category-title {
-  font-size: 22px;
-  margin-bottom: 40px;
+  font-size: 1.375rem;
+  margin-bottom: 2.5rem;
   color: #ff004f;
   letter-spacing: 1px;
   position: relative;
@@ -27,24 +27,24 @@
 .category-title::after {
   content: "";
   display: block;
-  width: 60px;
+  width: 3.75rem;
   height: 3px;
   background: #ff004f;
-  margin-top: 8px;
+  margin-top: 0.5rem;
   border-radius: 2px;
 }
 
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(8.75rem, 1fr));
+  gap: 2.5rem;
 }
 
 
 .skill-card {
   background: #1a1a1a;
-  padding: 30px 20px;
+  padding: 1.875rem 1.25rem;
   border-radius: 16px;
   text-align: center;
   border: 1px solid #222;
@@ -58,8 +58,8 @@
 }
 
 .skill-icon {
-  font-size: 50px;
-  margin-bottom: 15px;
+  font-size: 3.125rem;
+  margin-bottom: 0.9375rem;
   transition: transform 0.3s ease;
 }
 
@@ -68,65 +68,11 @@
 }
 
 .skill-card p {
-  font-size: 14px;
+  font-size: 0.875rem;
   letter-spacing: 0.5px;
 }
 
 
-/* spin Starts */
-
-/* .spin-section {
-  height: 100vh;
-  background: radial-gradient(circle at center, #140015, #0f0f0f);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-}
-
-.spin-section h2 {
-  font-size: 40px;
-  margin-bottom: 60px;
-}
-
-
-.spin-container {
-  perspective: 1000px;
-}
-
-.spin-circle {
-  position: relative;
-  width: 500px;
-  height: 500px;
-  animation: rotateCircle 20s linear infinite;
-  transform-style: preserve-3d;
-}
-
-@keyframes rotateCircle {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.spin-item {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 40px;
-  transform-origin: 0 0;
-  transition: transform 0.3s ease;
-}
-
-.spin-item:hover {
-  transform: scale(1.3) !important;
-  color: #ff004f;
-}
- */
 /* Overlay and Blur Effect */
 .orbit-container.blurred {
   filter: blur(4px) brightness(0.5);
@@ -151,9 +97,9 @@
   background: rgba(25, 10, 20, 0.85);
   border: 1px solid rgba(255, 0, 79, 0.5);
   backdrop-filter: blur(20px);
-  padding: 40px;
+  padding: 2.5rem;
   border-radius: 24px;
-  width: 320px;
+  width: min(20rem, 90vw);
   text-align: center;
   box-shadow: 0 0 50px rgba(255, 0, 79, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
   position: relative;
@@ -161,34 +107,34 @@
 }
 
 .card-icon {
-  font-size: 60px;
-  margin-bottom: 20px;
+  font-size: 3.75rem;
+  margin-bottom: 1.25rem;
   filter: drop-shadow(0 0 15px #ff004f);
 }
 
 .detail-card h3 {
-  font-size: 28px;
+  font-size: 1.75rem;
   color: #fff;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
   letter-spacing: 1px;
 }
 
 .detail-card p {
   color: #ccc;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.6;
-  margin-bottom: 25px;
+  margin-bottom: 1.5625rem;
 }
 
 /* Buttons */
 .close-btn {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 0.9375rem;
+  right: 0.9375rem;
   background: none;
   border: none;
   color: #ff004f;
-  font-size: 24px;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -199,7 +145,7 @@
   background: #ff004f;
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 0.75rem 1.5rem;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
@@ -225,39 +171,16 @@
   from { transform: translateY(50px) scale(0.9); opacity: 0; }
   to { transform: translateY(0) scale(1); opacity: 1; }
 }
-/* 3. Apply to Grid Icons (Hover Flip) */
-.skill-icon {
-  display: inline-block;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-
-.skill-card:hover .skill-icon {
-  transform: rotateY(360deg) scale(1.2); /* Full flip on hover */
-  color: #ff004f;
-}
-
-/* Optional: Add a "floating" effect to the orbit icons to make them feel organic */
-@keyframes floating {
-  0% { margin-top: 0px; }
-  50% { margin-top: -10px; }
-  100% { margin-top: 0px; }
-}
-
-.orbit-item {
-  animation: local-spin 6s linear infinite, floating 3s ease-in-out infinite;
-}
-
 
 /* Glassmorphism Card Style */
 .skill-card {
-  background: rgba(255, 255, 255, 0.03); /* Semi-transparent white */
-  backdrop-filter: blur(10px); /* The "frosted glass" effect */
-  -webkit-backdrop-filter: blur(10px); 
-  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1.875rem 1.25rem;
   border-radius: 16px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
@@ -287,21 +210,21 @@
   transform: translateY(-10px) scale(1.02);
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 0, 79, 0.6);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
               0 0 20px rgba(255, 0, 79, 0.2);
 }
 
 /* Icon Flip Animation */
 .skill-icon {
   display: inline-block;
-  font-size: 50px;
-  margin-bottom: 15px;
+  font-size: 3.125rem;
+  margin-bottom: 0.9375rem;
   transition: transform 0.8s ease;
   transform-style: preserve-3d;
 }
 
 .skill-card:hover .skill-icon {
-  transform: rotateY(360deg); /* The flip */
+  transform: rotateY(360deg);
 }
 
 /* Orbit Icon wrapper for independent rotation */
@@ -317,35 +240,52 @@
   to { transform: rotateY(360deg); }
 }
 
+@keyframes floating {
+  0% { margin-top: 0px; }
+  50% { margin-top: -10px; }
+  100% { margin-top: 0px; }
+}
+
+.orbit-item {
+  animation: local-spin 6s linear infinite, floating 3s ease-in-out infinite;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .skills-section {
-    padding: 80px 32px;
+    padding: 5rem 2rem;
   }
 
-  .skills-title { font-size: 30px; margin-bottom: 60px; }
+  .skills-title { font-size: 1.875rem; margin-bottom: 3.75rem; }
 
   .skills-grid {
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(6.875rem, 1fr));
+    gap: 1.5rem;
   }
 
-  .skill-card { padding: 24px 14px; }
+  .skill-card { padding: 1.5rem 0.875rem; }
 
-  .skill-icon { font-size: 38px; }
+  .skill-icon { font-size: 2.375rem; }
 }
 
 @media (max-width: 480px) {
-  .skills-section { padding: 60px 16px; }
+  .skills-section { padding: 3.75rem 1rem; }
 
   .skills-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 0.875rem;
   }
 
-  .skill-card { padding: 18px 10px; }
+  .skill-card { padding: 1.125rem 0.625rem; }
 
-  .skill-icon { font-size: 32px; }
+  .skill-icon { font-size: 2rem; }
+}
 
-  .detail-card { width: 90vw; padding: 28px 20px; }
+@media (max-width: 360px) {
+  .skills-section { padding: 3rem 0.75rem; }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
 }

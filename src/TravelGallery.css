@@ -140,14 +140,20 @@
 }
 
 /* Heights by span type */
-.tg-tile--tall     { height: 520px; }
-.tg-tile--small    { height: 280px; }
-.tg-tile--wide     { height: 360px; }
+.tg-tile--tall     { height: 32.5rem; }
+.tg-tile--small    { height: 17.5rem; }
+.tg-tile--wide     { height: 22.5rem; }
 
 @media (max-width: 900px) {
-  .tg-tile--tall  { height: 420px; }
-  .tg-tile--small { height: 230px; }
-  .tg-tile--wide  { height: 290px; }
+  .tg-tile--tall  { height: 26.25rem; }
+  .tg-tile--small { height: 14.375rem; }
+  .tg-tile--wide  { height: 18.125rem; }
+}
+
+@media (max-width: 640px) {
+  .tg-tile--tall  { height: 22rem; }
+  .tg-tile--small { height: 14rem; }
+  .tg-tile--wide  { height: 16rem; }
 }
 
 .tg-tile img {

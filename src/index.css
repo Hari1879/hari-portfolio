@@ -1,10 +1,27 @@
 html {
   scroll-behavior: smooth;
+  font-size: 100%;
 }
 
 body {
   margin: 0;
   background: #0b0b0c;
+}
+
+/* Prevent drag-to-save and long-press save on all images */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+/* Re-enable pointer events on interactive image wrappers as needed */
+a img, button img, [role="button"] img {
+  pointer-events: auto;
 }
 
 #root {

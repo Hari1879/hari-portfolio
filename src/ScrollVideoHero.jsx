@@ -3,156 +3,135 @@ import video1 from "./assets/videos/can_u_reduce_the_video_length.mp4";
 import video2 from "./assets/videos/uccan_u_generate_same_for_dlsr_c.mp4";
 import "./ScrollVideoHero.css";
 
-const TOTAL_DELTA = 5000;
-const LERP        = 0.09; // fraction of remaining gap closed per frame (~60 fps)
+const COOLDOWN = 900; // ms minimum between step advances
 
 export default function ScrollVideoHero({ onDone }) {
   const vid1Ref   = useRef(null);
   const vid2Ref   = useRef(null);
-  const targetRef = useRef(0);   // raw accumulated scroll — updated instantly
-  const smoothRef = useRef(0);   // lerped 0-1 progress — drives the video
-  const rafRef    = useRef(null);
   const doneRef   = useRef(false);
-  const [progress, setProgress] = useState(0);
-  const [exiting,  setExiting]  = useState(false);
+  const onDoneRef = useRef(onDone);
+  const stepRef   = useRef(0);
+  const lastTime  = useRef(0);
+  const [step,    setStep]    = useState(0);
+  const [exiting, setExiting] = useState(false);
+
+  useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
 
   const finish = useCallback(() => {
     if (doneRef.current) return;
     doneRef.current = true;
     setExiting(true);
-    setTimeout(onDone, 800);
-  }, [onDone]);
+    setTimeout(() => {
+      document.body.style.overflow = "";
+      window.scrollTo(0, 0);          // clear any scroll that leaked through
+      onDoneRef.current();
+      // After React removes the banner, jump to About section
+      requestAnimationFrame(() => {
+        const about = document.getElementById("about");
+        if (about) about.scrollIntoView({ behavior: "smooth" });
+      });
+    }, 800);
+  }, []);
 
+  // Each call advances one step; 4th scroll triggers exit
+  const advance = useCallback(() => {
+    if (doneRef.current) return;
+    const now = Date.now();
+    if (now - lastTime.current < COOLDOWN) return;
+    lastTime.current = now;
+
+    const next = stepRef.current + 1;
+    // steps 0-1 → video 1  |  step 2 → video 2  |  step 3+ → exit
+    if (next > 3) { finish(); return; }
+    stepRef.current = next;
+    setStep(next);
+  }, [finish]);
+
+  // Lock scroll, start video 1, wire events
   useEffect(() => {
+    document.body.style.overflow = "hidden";
     const vid1 = vid1Ref.current;
     const vid2 = vid2Ref.current;
-
     vid1.load();
     vid2.load();
-    document.body.style.overflow = "hidden";
+    vid1.play().catch(() => {});
 
-    // Prime both decoders: play→pause forces the browser to initialise
-    // the video pipeline so currentTime seeks actually render frames.
-    const prime = (vid) =>
-      vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
-    prime(vid1);
-    prime(vid2);
-
-    const applyProgress = (p) => {
-      // ── Video 1 scrub ──
-      if (vid1.duration) {
-        vid1.currentTime = Math.min(1, p / 0.5) * vid1.duration;
-      }
-      // ── Video 2 scrub (pre-seek from p=0.45 so frames are ready) ──
-      if (p >= 0.45 && vid2.duration) {
-        vid2.currentTime = Math.max(0, Math.min(1, (p - 0.5) / 0.5)) * vid2.duration;
-      }
-      // ── Cross-fade: 0.45 → 0.55 overlap zone ──
-      if (p <= 0.45) {
-        vid1.style.opacity = "1";
-        vid2.style.opacity = "0";
-      } else if (p >= 0.55) {
-        vid1.style.opacity = "0";
-        vid2.style.opacity = "1";
-      } else {
-        const blend = (p - 0.45) / 0.1;
-        vid1.style.opacity = String(1 - blend);
-        vid2.style.opacity = String(blend);
-      }
-    };
-
-    // ── RAF loop: lerps smoothRef toward targetRef every frame ──
-    const tick = () => {
-      const target = targetRef.current / TOTAL_DELTA;
-      const diff   = target - smoothRef.current;
-
-      if (Math.abs(diff) > 0.00015) {
-        smoothRef.current += diff * LERP;
-        const p = Math.min(1, Math.max(0, smoothRef.current));
-        setProgress(p);
-        applyProgress(p);
-        if (p >= 0.9999) { finish(); return; }
-      } else if (target >= 1) {
-        // Lerp stalled just below 1 — snap to finish
-        finish();
-        return;
-      }
-
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-
-    // Scroll only updates the target — the RAF loop does all the seeking
-    const step = (delta) => {
-      targetRef.current = Math.max(0, Math.min(TOTAL_DELTA, targetRef.current + delta));
-    };
-
-    const onWheel      = (e) => step(e.deltaY);
-    let   touchY       = 0;
+    let touchY = 0;
+    // non-passive so preventDefault() prevents the page behind from scrolling
+    const onWheel      = (e) => { e.preventDefault(); if (e.deltaY > 5) advance(); };
     const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
     const onTouchMove  = (e) => {
+      e.preventDefault();
       const dy = touchY - e.touches[0].clientY;
-      touchY   = e.touches[0].clientY;
-      step(dy * 3);
+      if (dy > 25) { touchY = e.touches[0].clientY; advance(); }
     };
 
-    window.addEventListener("wheel",      onWheel,      { passive: true });
+    window.addEventListener("wheel",      onWheel,      { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove",  onTouchMove,  { passive: true });
+    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
       window.removeEventListener("wheel",      onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove",  onTouchMove);
-      document.body.style.overflow = "";
+      // Safety: restore overflow if unmounted without finish (e.g. hot reload)
+      if (!doneRef.current) document.body.style.overflow = "";
     };
-  }, [finish]);
+  }, [advance]);
 
-  const WORDS = ["Angular", "React", "Javascript"];
-  const seg   = Math.min(2, Math.floor(progress * 3));
-  const local = (progress * 3) % 1;
-  const wordOpacity = progress < 0.02 ? 0
-    : local < 0.25 ? local / 0.25
-    : local > 0.75 ? (1 - local) / 0.25
-    : 1;
+  // Sync video visibility when step changes
+  useEffect(() => {
+    const vid1 = vid1Ref.current;
+    const vid2 = vid2Ref.current;
+    if (step < 3) {
+      vid1.style.opacity = "1";
+      vid2.style.opacity = "0";
+      vid2.pause();
+    } else {
+      vid1.style.opacity = "0";
+      vid2.style.opacity = "1";
+      vid2.currentTime = 0;
+      vid2.play().catch(() => {});
+    }
+  }, [step]);
+
+  const WORDS   = ["Angular", "React", "Javascript"];
+  const wordIdx = Math.min(step, 2);
 
   return (
     <div className={`svh-banner${exiting ? " svh-exiting" : ""}`}>
       <div className="svh-bg" />
 
-      <video ref={vid1Ref} className="svh-video"           src={video1} muted playsInline preload="auto" />
-      <video ref={vid2Ref} className="svh-video svh-video-2" src={video2} muted playsInline preload="auto" />
+      <video ref={vid1Ref} className="svh-video"              src={video1} muted playsInline preload="auto" loop />
+      <video ref={vid2Ref} className="svh-video svh-video-2"  src={video2} muted playsInline preload="auto" loop />
 
       <div className="svh-vignette" />
 
-      <div className="svh-content" style={{ transform: `translateY(${progress * -60}px)` }}>
+      <div className="svh-content">
         <p className="svh-eyebrow">Portfolio</p>
         <h1 className="svh-name">Hari</h1>
         <p className="svh-tagline">Front-End Engineer</p>
 
-        <div
-          className="svh-skill-word"
-          style={{
-            opacity:   wordOpacity,
-            transform: `translateY(${(1 - wordOpacity) * 12}px)`,
-          }}
-        >
+        <div className="svh-skill-word" key={wordIdx}>
           <span className="svh-skill-dot" />
-          {WORDS[seg]}
+          {WORDS[wordIdx]}
         </div>
       </div>
 
-      <div className="svh-hint" style={{ opacity: progress > 0.04 ? 0 : 1 }}>
-        <div className="svh-hint-mouse">
-          <div className="svh-hint-wheel" />
-        </div>
+      <div className="svh-hint" style={{ opacity: step === 0 ? 1 : 0 }}>
+        <div className="svh-hint-mouse"><div className="svh-hint-wheel" /></div>
         <span>scroll to explore</span>
       </div>
 
+      {/* Step indicator dots */}
+      <div className="svh-steps">
+        {[0, 1, 2, 3].map(i => (
+          <div key={i} className={`svh-step-dot${step >= i ? " svh-step-dot--active" : ""}`} />
+        ))}
+      </div>
+
       <div className="svh-progress-track">
-        <div className="svh-progress-fill" style={{ width: `${progress * 100}%` }} />
+        <div className="svh-progress-fill" style={{ width: `${(step / 3) * 100}%` }} />
       </div>
 
       <button className="svh-skip" onClick={finish} aria-label="Skip intro">
