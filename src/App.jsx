@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Home from './home'
 import './App.css'
 import { Toaster } from 'react-hot-toast'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import HobbiesPage from './hobbiesPage'
 import ScrollIndicator from './ScrollIndicator'
 import TravelPage from './TravelPage'
@@ -11,6 +11,7 @@ import TravelGallery from './TravelGallery'
 import PlaceGallery from './PlaceGallery'
 import { PageTransitionProvider } from './PageTransition'
 import ScrollVideoHero from './ScrollVideoHero'
+import { trackPageView } from './analytics.js'
 
 function InitialLoader({ onRevealBanner, onDone }) {
   const [suffixOut, setSuffixOut] = useState(false);
@@ -52,6 +53,39 @@ function InitialLoader({ onRevealBanner, onDone }) {
   );
 }
 
+function AnalyticsTracker() {
+  const location = useLocation()
+
+  useEffect(() => {
+    trackPageView(location.pathname + location.search)
+  }, [location.key, location.pathname, location.search])
+
+  useEffect(() => {
+    let hasTrackedBottom = false
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      const atBottom = scrollTop + windowHeight >= documentHeight - 8
+
+      if (atBottom && !hasTrackedBottom) {
+        hasTrackedBottom = true
+        window.gtag?.('event', 'scroll_to_bottom', {
+          page_path: location.pathname + location.search,
+        })
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [location.key, location.pathname, location.search])
+
+  return null
+}
+
 function App() {
   const [showLoader, setShowLoader] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
@@ -82,6 +116,7 @@ function App() {
       {showBanner && <ScrollVideoHero onDone={handleBannerDone} />}
 
     <BrowserRouter>
+      <AnalyticsTracker />
 
       <Toaster
         position="top-right"

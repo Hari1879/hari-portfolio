@@ -5,6 +5,7 @@ import './SkillOrbit.css';
 
 const PROJECTS = [
   {
+    id: 1,
     title: "FTPL Field Intelligence",
     subtitle: "React · Firebase · Node.js",
     imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop",
@@ -13,6 +14,7 @@ const PROJECTS = [
     accent: "#ff004f",
   },
   {
+    id: 2,
     title: "Aadhava Constructions",
     subtitle: "React · Next.js · Vercel",
     imageUrl: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop",
@@ -21,6 +23,7 @@ const PROJECTS = [
     accent: "#f7971e",
   },
   {
+    id: 3,
     title: "Attendra",
     subtitle: "React · Node.js · MySQL",
     imageUrl: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80&auto=format&fit=crop",
@@ -33,7 +36,7 @@ const PROJECTS = [
 // Low damping = pronounced elastic overshoot on release
 const springConfig = { damping: 6, stiffness: 280 };
 
-function ProjectCard({ title, subtitle, imageUrl, actionText, href, accent, delay }) {
+function ProjectCard({ id, title, subtitle, imageUrl, actionText, href, accent, delay }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -53,6 +56,14 @@ function ProjectCard({ title, subtitle, imageUrl, actionText, href, accent, dela
   const handleMouseLeave = () => {
     mouseX.set(0);
     mouseY.set(0);
+  };
+
+  const handleProjectClick = () => {
+    window.gtag?.('event', 'recent_project_click', {
+      project_name: title,
+      project_id: id,
+      project_href: href,
+    });
   };
 
   return (
@@ -103,6 +114,7 @@ function ProjectCard({ title, subtitle, imageUrl, actionText, href, accent, dela
             <motion.a
               href={href}
               target="_blank"
+              onClick={handleProjectClick}
               rel="noopener noreferrer"
               whileHover={{ scale: 1.15, rotate: '8deg' }}
               whileTap={{ scale: 0.88 }}
@@ -119,6 +131,7 @@ function ProjectCard({ title, subtitle, imageUrl, actionText, href, accent, dela
             href={href}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={handleProjectClick}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             style={{ transform: 'translateZ(50px)' }}
@@ -132,6 +145,7 @@ function ProjectCard({ title, subtitle, imageUrl, actionText, href, accent, dela
     </motion.div>
   );
 }
+
 
 export default function RecentProjects() {
   return (

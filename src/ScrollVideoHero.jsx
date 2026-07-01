@@ -33,7 +33,7 @@ export default function ScrollVideoHero({ onDone }) {
     }, 800);
   }, []);
 
-  // Each call advances one step; 4th scroll triggers exit
+  // Each call advances one step; 4th click triggers exit
   const advance = useCallback(() => {
     if (doneRef.current) return;
     const now = Date.now();
@@ -47,7 +47,12 @@ export default function ScrollVideoHero({ onDone }) {
     setStep(next);
   }, [finish]);
 
-  // Lock scroll, start video 1, wire events
+  const handleBannerClick = useCallback((e) => {
+    if (e.target.closest("button")) return;
+    advance();
+  }, [advance]);
+
+  // Lock scroll, start video 1
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const vid1 = vid1Ref.current;
@@ -56,28 +61,11 @@ export default function ScrollVideoHero({ onDone }) {
     vid2.load();
     vid1.play().catch(() => {});
 
-    let touchY = 0;
-    // non-passive so preventDefault() prevents the page behind from scrolling
-    const onWheel      = (e) => { e.preventDefault(); if (e.deltaY > 5) advance(); };
-    const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
-    const onTouchMove  = (e) => {
-      e.preventDefault();
-      const dy = touchY - e.touches[0].clientY;
-      if (dy > 25) { touchY = e.touches[0].clientY; advance(); }
-    };
-
-    window.addEventListener("wheel",      onWheel,      { passive: false });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
-
     return () => {
-      window.removeEventListener("wheel",      onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove",  onTouchMove);
       // Safety: restore overflow if unmounted without finish (e.g. hot reload)
       if (!doneRef.current) document.body.style.overflow = "";
     };
-  }, [advance]);
+  }, []);
 
   // Sync video visibility when step changes
   useEffect(() => {
@@ -99,7 +87,7 @@ export default function ScrollVideoHero({ onDone }) {
   const wordIdx = Math.min(step, 2);
 
   return (
-    <div className={`svh-banner${exiting ? " svh-exiting" : ""}`}>
+    <div className={`svh-banner${exiting ? " svh-exiting" : ""}`} onClick={handleBannerClick}>
       <div className="svh-bg" />
 
       <video ref={vid1Ref} className="svh-video"              src={video1} muted playsInline preload="auto" loop />
@@ -120,7 +108,7 @@ export default function ScrollVideoHero({ onDone }) {
 
       <div className="svh-hint" style={{ opacity: step === 0 ? 1 : 0 }}>
         <div className="svh-hint-mouse"><div className="svh-hint-wheel" /></div>
-        <span>scroll to explore</span>
+        <span>click to explore</span>
       </div>
 
       {/* Step indicator dots */}
