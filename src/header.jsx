@@ -72,7 +72,7 @@ function Header() {
             </button>
             {showHobbiesMenu && <HobbiesMenu onClose={() => { setShowHobbiesMenu(false); closeMenu(); }} />}
           </div>
-          <a
+          {/* <a
             href="/travel"
             onClick={(e) => {
               e.preventDefault()
@@ -82,7 +82,7 @@ function Header() {
             }}
           >
             Travel
-          </a>
+          </a> */}
           <a href="/#contact" onClick={closeMenu}>Contact</a>
           <button
             onClick={() => {

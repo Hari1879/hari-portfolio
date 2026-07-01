@@ -53,6 +53,7 @@ export default function HobbiesMenu({ onClose }) {
   const handleItem = (route) => {
     onClose();
     window.scrollTo({ top: 0, behavior: "instant" });
+    window.gtag?.('event', `route_${route}`, { source: 'header' });
     navigate(route);
   };
 
