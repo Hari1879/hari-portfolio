@@ -194,6 +194,7 @@ export default function TravelPage() {
     (next) => {
       const clamped = Math.max(-1, Math.min(travels.length - 1, next));
       setDirection(next > active ? 1 : -1);
+      window.gtag?.('event', 'travel_click' + clamped, { source: 'page' });
       setActive(clamped);
     },
     [active]

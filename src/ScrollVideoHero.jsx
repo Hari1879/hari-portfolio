@@ -17,6 +17,15 @@ export default function ScrollVideoHero({ onDone }) {
 
   useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
 
+  const tryPlayVideo = useCallback(async (video) => {
+    if (!video) return;
+    try {
+      await video.play();
+    } catch {
+      // Autoplay may be blocked until the user interacts.
+    }
+  }, []);
+
   const finish = useCallback(() => {
     if (doneRef.current) return;
     doneRef.current = true;
@@ -33,7 +42,7 @@ export default function ScrollVideoHero({ onDone }) {
     }, 800);
   }, []);
 
-  // Each call advances one step; 4th scroll triggers exit
+  // Each call advances one step; 4th click triggers exit
   const advance = useCallback(() => {
     if (doneRef.current) return;
     const now = Date.now();
@@ -47,37 +56,31 @@ export default function ScrollVideoHero({ onDone }) {
     setStep(next);
   }, [finish]);
 
-  // Lock scroll, start video 1, wire events
+  const handleBannerClick = useCallback((e) => {
+    if (e.target.closest("button")) return;
+    advance();
+
+    const vid1 = vid1Ref.current;
+    const vid2 = vid2Ref.current;
+    if (step < 3) {
+      tryPlayVideo(vid1);
+    } else {
+      tryPlayVideo(vid2);
+    }
+  }, [advance, step, tryPlayVideo]);
+
+  // Lock scroll, start video 1
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const vid1 = vid1Ref.current;
-    const vid2 = vid2Ref.current;
     vid1.load();
-    vid2.load();
-    vid1.play().catch(() => {});
-
-    let touchY = 0;
-    // non-passive so preventDefault() prevents the page behind from scrolling
-    const onWheel      = (e) => { e.preventDefault(); if (e.deltaY > 5) advance(); };
-    const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
-    const onTouchMove  = (e) => {
-      e.preventDefault();
-      const dy = touchY - e.touches[0].clientY;
-      if (dy > 25) { touchY = e.touches[0].clientY; advance(); }
-    };
-
-    window.addEventListener("wheel",      onWheel,      { passive: false });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
+    tryPlayVideo(vid1);
 
     return () => {
-      window.removeEventListener("wheel",      onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove",  onTouchMove);
       // Safety: restore overflow if unmounted without finish (e.g. hot reload)
       if (!doneRef.current) document.body.style.overflow = "";
     };
-  }, [advance]);
+  }, [tryPlayVideo]);
 
   // Sync video visibility when step changes
   useEffect(() => {
@@ -90,16 +93,17 @@ export default function ScrollVideoHero({ onDone }) {
     } else {
       vid1.style.opacity = "0";
       vid2.style.opacity = "1";
+      vid2.load();
       vid2.currentTime = 0;
-      vid2.play().catch(() => {});
+      tryPlayVideo(vid2);
     }
-  }, [step]);
+  }, [step, tryPlayVideo]);
 
   const WORDS   = ["Angular", "React", "Javascript"];
   const wordIdx = Math.min(step, 2);
 
   return (
-    <div className={`svh-banner${exiting ? " svh-exiting" : ""}`}>
+    <div className={`svh-banner${exiting ? " svh-exiting" : ""}`} onClick={handleBannerClick}>
       <div className="svh-bg" />
 
       <video ref={vid1Ref} className="svh-video"              src={video1} muted playsInline preload="auto" loop />
@@ -120,7 +124,7 @@ export default function ScrollVideoHero({ onDone }) {
 
       <div className="svh-hint" style={{ opacity: step === 0 ? 1 : 0 }}>
         <div className="svh-hint-mouse"><div className="svh-hint-wheel" /></div>
-        <span>scroll to explore</span>
+        <span>click to explore</span>
       </div>
 
       {/* Step indicator dots */}

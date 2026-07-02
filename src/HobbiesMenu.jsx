@@ -20,25 +20,25 @@ const items = [
     desc: "Capturing moments that tell visual stories.",
     color: "#ff004f",
     route: "/gallery",
-  },
-  {
-    id: "music",
-    icon: "🎵",
-    title: "Music",
-    tag: "Focus · Relax",
-    desc: "Curated playlists for deep work and flow.",
-    color: "#4facfe",
-    route: "/hobbies",
-  },
-  {
-    id: "movies",
-    icon: "🎬",
-    title: "Movies",
-    tag: "Sci‑Fi · Thriller",
-    desc: "Loving storytelling and cinematography.",
-    color: "#f7971e",
-    route: "/hobbies",
-  },
+  }
+  // {
+  //   id: "music",
+  //   icon: "🎵",
+  //   title: "Music",
+  //   tag: "Focus · Relax",
+  //   desc: "Curated playlists for deep work and flow.",
+  //   color: "#4facfe",
+  //   route: "/hobbies",
+  // },
+  // {
+  //   id: "movies",
+  //   icon: "🎬",
+  //   title: "Movies",
+  //   tag: "Sci‑Fi · Thriller",
+  //   desc: "Loving storytelling and cinematography.",
+  //   color: "#f7971e",
+  //   route: "/hobbies",
+  // },
 ];
 
 export default function HobbiesMenu({ onClose }) {
@@ -53,6 +53,7 @@ export default function HobbiesMenu({ onClose }) {
   const handleItem = (route) => {
     onClose();
     window.scrollTo({ top: 0, behavior: "instant" });
+    window.gtag?.('event', `route_${route}`, { source: 'header' });
     navigate(route);
   };
 

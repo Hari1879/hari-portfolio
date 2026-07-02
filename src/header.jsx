@@ -11,7 +11,11 @@ function Header() {
   const [showHobbiesMenu, setShowHobbiesMenu] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => { setMenuOpen(false); setShowHobbiesMenu(false); };
+  const closeMenu = (data) => { 
+       if(data) {
+        window.gtag?.('event', data, { method: 'google' })
+       }
+    setMenuOpen(false); setShowHobbiesMenu(false); };
 
   const handleResumeClick = (e) => {
     e.preventDefault();
@@ -53,25 +57,52 @@ function Header() {
         </button>
 
         <nav className={`nav${menuOpen ? ' nav--open' : ''}`}>
-          <a href="/#about" onClick={closeMenu}>About</a>
-          <a href="/#about" onClick={(e) => { closeMenu(); handleResumeClick(e); }}>Resume</a>
-          <a href="/#skills" onClick={closeMenu}>Skills</a>
+          <a href="/#about" onClick={() => closeMenu('about')}>About</a>
+          <a href="/#about" onClick={(e) => { closeMenu('about'); handleResumeClick(e); }}>Resume</a>
+          <a href="/#skills" onClick={() => closeMenu('skills')}>Skills</a>
           <div className="hobbies-nav-wrapper">
             <button
               className={`nav-link hobbies-nav-btn${location.pathname === '/hobbies' ? ' active' : ''}`}
-              onClick={() => setShowHobbiesMenu(v => !v)}
+              onClick={() => {
+                window.gtag?.('event', 'hobbies_click', { source: 'header' })
+                setShowHobbiesMenu(v => !v)
+              }}
             >
               Hobbies <span className={`hm-chevron${showHobbiesMenu ? ' open' : ''}`}>›</span>
             </button>
             {showHobbiesMenu && <HobbiesMenu onClose={() => { setShowHobbiesMenu(false); closeMenu(); }} />}
           </div>
+          {/* <a
+            href="/travel"
+            onClick={(e) => {
+              e.preventDefault()
+              window.gtag?.('event', 'travel_page_click', { source: 'header' })
+              navigate('/travel')
+              closeMenu()
+            }}
+          >
+            Travel
+          </a> */}
           <a href="/#contact" onClick={closeMenu}>Contact</a>
-          <button onClick={() => { setShowHireModal(true); closeMenu(); }} className="hire-btn">Hire Me</button>
+          <button
+            onClick={() => {
+              window.gtag?.('event', 'hire_me_click', { source: 'header' })
+              setShowHireModal(true)
+              closeMenu('hire')
+            }}
+            className="hire-btn"
+          >
+            Hire Me
+          </button>
         </nav>
       </div>
     </header>
 
-    {showHireModal && <HireMeModal onClose={() => setShowHireModal(false)} />}
+    {showHireModal && <HireMeModal onClose={() => {
+      window.gtag?.('event', 'hire_me_click', { source: 'header' })
+      setShowHireModal(false)}
+    }
+       />}
   </>);
 }
 

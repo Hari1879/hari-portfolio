@@ -116,6 +116,14 @@ function ProjectCard({ project, index }) {
     setGlow({ x: 50, y: 50 });
   };
 
+  const handleProjectClick = () => {
+    window.gtag?.('event', 'project_click', {
+      project_name: project.name,
+      project_id: project.id,
+      project_company: project.company,
+    });
+  };
+
   return (
     <motion.div
       ref={wrapRef}
@@ -129,6 +137,7 @@ function ProjectCard({ project, index }) {
         className="proj-card"
         onMouseMove={onMove}
         onMouseLeave={onLeave}
+        onClick={handleProjectClick}
         style={{
           "--accent":       project.color,
           "--accent-dim":   project.colorDim,
