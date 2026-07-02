@@ -17,6 +17,15 @@ export default function ScrollVideoHero({ onDone }) {
 
   useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
 
+  const tryPlayVideo = useCallback(async (video) => {
+    if (!video) return;
+    try {
+      await video.play();
+    } catch {
+      // Autoplay may be blocked until the user interacts.
+    }
+  }, []);
+
   const finish = useCallback(() => {
     if (doneRef.current) return;
     doneRef.current = true;
@@ -50,22 +59,28 @@ export default function ScrollVideoHero({ onDone }) {
   const handleBannerClick = useCallback((e) => {
     if (e.target.closest("button")) return;
     advance();
-  }, [advance]);
+
+    const vid1 = vid1Ref.current;
+    const vid2 = vid2Ref.current;
+    if (step < 3) {
+      tryPlayVideo(vid1);
+    } else {
+      tryPlayVideo(vid2);
+    }
+  }, [advance, step, tryPlayVideo]);
 
   // Lock scroll, start video 1
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const vid1 = vid1Ref.current;
-    const vid2 = vid2Ref.current;
     vid1.load();
-    vid2.load();
-    vid1.play().catch(() => {});
+    tryPlayVideo(vid1);
 
     return () => {
       // Safety: restore overflow if unmounted without finish (e.g. hot reload)
       if (!doneRef.current) document.body.style.overflow = "";
     };
-  }, []);
+  }, [tryPlayVideo]);
 
   // Sync video visibility when step changes
   useEffect(() => {
@@ -78,10 +93,11 @@ export default function ScrollVideoHero({ onDone }) {
     } else {
       vid1.style.opacity = "0";
       vid2.style.opacity = "1";
+      vid2.load();
       vid2.currentTime = 0;
-      vid2.play().catch(() => {});
+      tryPlayVideo(vid2);
     }
-  }, [step]);
+  }, [step, tryPlayVideo]);
 
   const WORDS   = ["Angular", "React", "Javascript"];
   const wordIdx = Math.min(step, 2);
