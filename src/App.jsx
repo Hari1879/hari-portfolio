@@ -1,14 +1,14 @@
-import { useState, useEffect, useCallback } from 'react'
-import Home from './home'
+import { useState, useEffect, useCallback, Suspense, lazy } from 'react'
 import './App.css'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import HobbiesPage from './hobbiesPage'
 import ScrollIndicator from './ScrollIndicator'
-import TravelPage from './TravelPage'
-import TravelDetail from './TravelDetail'
-import TravelGallery from './TravelGallery'
-import PlaceGallery from './PlaceGallery'
+const Home = lazy(() => import('./home'))
+const HobbiesPage = lazy(() => import('./hobbiesPage'))
+const TravelPage = lazy(() => import('./TravelPage'))
+const TravelDetail = lazy(() => import('./TravelDetail'))
+const TravelGallery = lazy(() => import('./TravelGallery'))
+const PlaceGallery = lazy(() => import('./PlaceGallery'))
 import { PageTransitionProvider } from './PageTransition'
 import ScrollVideoHero from './ScrollVideoHero'
 import { trackPageView } from './analytics.js'
@@ -164,14 +164,16 @@ function App() {
       <ScrollIndicator />
 
       <PageTransitionProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/hobbies" element={<HobbiesPage />} />
-          <Route path="/travel" element={<TravelPage />} />
-          <Route path="/travel/:id" element={<TravelDetail />} />
-          <Route path="/gallery" element={<TravelGallery />} />
-          <Route path="/gallery/:id" element={<PlaceGallery />} />
-        </Routes>
+        <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}></div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/hobbies" element={<HobbiesPage />} />
+            <Route path="/travel" element={<TravelPage />} />
+            <Route path="/travel/:id" element={<TravelDetail />} />
+            <Route path="/gallery" element={<TravelGallery />} />
+            <Route path="/gallery/:id" element={<PlaceGallery />} />
+          </Routes>
+        </Suspense>
       </PageTransitionProvider>
     </BrowserRouter>
     </>
